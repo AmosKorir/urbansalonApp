@@ -25,6 +25,6 @@ public class SalonDetailsActivity extends BaseActivity {
 
   private void initRecyclerView() {
     serviceRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-    serviceRecyclerView.setAdapter(new ServicesRecyclerViewAdapter(this));
+    //serviceRecyclerView.setAdapter(new ServicesRecyclerViewAdapter(this));
   }
 }

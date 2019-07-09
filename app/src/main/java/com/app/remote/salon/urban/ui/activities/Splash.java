@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.app.remote.domain.repositories.SalonRepository;
 import com.app.remote.salon.urban.R;
 
 public class Splash extends AppCompatActivity {
@@ -13,5 +14,6 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startActivity(new Intent(this,MainDashBoadActivity.class));
+        finish();
     }
 }

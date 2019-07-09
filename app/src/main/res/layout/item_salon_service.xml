@@ -22,7 +22,7 @@
         >
 
       <ImageView
-          android:id="@+id/imageView5"
+          android:id="@+id/image"
           android:layout_width="109dp"
           android:layout_height="97dp"
           android:layout_marginLeft="2dp"
@@ -40,7 +40,7 @@
           android:layout_marginStart="18dp"
           android:layout_marginTop="16dp"
           android:text="Blow dry"
-          app:layout_constraintStart_toEndOf="@+id/imageView5"
+          app:layout_constraintStart_toEndOf="@+id/image"
           app:layout_constraintTop_toTopOf="parent"
           />
       <TextView
@@ -51,7 +51,7 @@
           android:layout_marginStart="18dp"
           android:layout_marginTop="16dp"
           android:text="ksh 150"
-          app:layout_constraintStart_toEndOf="@+id/imageView5"
+          app:layout_constraintStart_toEndOf="@+id/image"
           app:layout_constraintTop_toBottomOf="@+id/serviceName"
           />
       <TextView

@@ -15,6 +15,10 @@ public class Constants {
     public static final int MILLISECONDS_1000 = 1000;
     public static final String MONTHS = "M";
     public static final String YEARS = "y";
-    public static String COMMA = ",";
+  public static final String ACCESS_TOKEN ="accessToken" ;
+  public static final String AUTHORIZATION ="x-access-token";
+  public static final String ACCESS_SALON = "salon-access";
+  public static final String SERVICEID = "serviceid";
+  public static String COMMA = ",";
     public static String EMPTY_STRING = "";
 }

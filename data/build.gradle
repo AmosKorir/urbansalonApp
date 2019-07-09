@@ -27,7 +27,7 @@ android {
         }
 
         debug{
-            buildConfigField('String', 'BASE_URL', '"https://"')
+            buildConfigField('String', 'BASE_URL', '"https://app-urbansalon.herokuapp.com/"')
         }
     }
 

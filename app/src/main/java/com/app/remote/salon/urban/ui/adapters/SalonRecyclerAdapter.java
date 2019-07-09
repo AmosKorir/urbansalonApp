@@ -8,18 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
+import com.app.remote.domain.models.customerOrders.CustomerOrder;
 import com.app.remote.salon.urban.R;
 import com.app.remote.salon.urban.ui.activities.SalonDetailsActivity;
+import java.util.List;
 
 /**
  * Created by Korir on 5/26/19.
  * amoskrr@gmail.com
  */
 public class SalonRecyclerAdapter extends RecyclerView.Adapter<SalonRecyclerAdapter.MyViewHolder> {
-  Context context;
+  private Context context;
+  private List<CustomerOrder> customerOrders;
 
-  public SalonRecyclerAdapter(Context context) {
+  public SalonRecyclerAdapter(Context context,
+      List<CustomerOrder> customerOrders) {
     this.context = context;
+    this.customerOrders = customerOrders;
   }
 
   @NonNull @Override public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -28,20 +33,20 @@ public class SalonRecyclerAdapter extends RecyclerView.Adapter<SalonRecyclerAdap
   }
 
   @Override public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-    myViewHolder.itemView.setOnClickListener(v->{
+    myViewHolder.itemView.setOnClickListener(v -> {
       context.startActivity(new Intent(context, SalonDetailsActivity.class));
     });
   }
 
   @Override public int getItemCount() {
-    return 12;
+    return customerOrders.size();
   }
 
-  public  class MyViewHolder extends RecyclerView.ViewHolder{
+  public class MyViewHolder extends RecyclerView.ViewHolder {
 
-      public MyViewHolder(@NonNull View itemView) {
-        super(itemView);
-        ButterKnife.bind(this,itemView);
-      }
+    public MyViewHolder(@NonNull View itemView) {
+      super(itemView);
+      ButterKnife.bind(this, itemView);
     }
+  }
 }
