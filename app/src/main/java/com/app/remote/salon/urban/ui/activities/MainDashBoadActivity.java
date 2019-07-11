@@ -11,12 +11,13 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import butterknife.OnClick;
 import com.app.remote.salon.urban.R;
 import com.app.remote.salon.urban.ui.fragments.HomeFragment;
+import com.app.remote.salon.urban.ui.fragments.customer.CustomerHistoryFragment;
 import com.app.remote.salon.urban.ui.fragments.customer.CustomerOrderFragment;
 import com.app.remote.salon.urban.ui.fragments.customer.CustomerProfileFragment;
 import javax.inject.Inject;
@@ -24,6 +25,7 @@ import javax.inject.Inject;
 public class MainDashBoadActivity extends BaseActivity
     implements NavigationView.OnNavigationItemSelectedListener {
   @Inject FragmentManager fragmentManager;
+  DrawerLayout drawer;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +33,13 @@ public class MainDashBoadActivity extends BaseActivity
     setContentView(R.layout.activity_main_dash_boad_activyity);
     injector().inject(this);
     Toolbar toolbar = findViewById(R.id.toolbar);
-
+    setTitle("Urban Salon");
     setSupportActionBar(toolbar);
     FloatingActionButton fab = findViewById(R.id.fab);
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show();
-      }
-    });
-    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+    fab.setOnClickListener(
+        view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            .setAction("Action", null).show());
+    drawer = findViewById(R.id.drawer_layout);
     NavigationView navigationView = findViewById(R.id.nav_view);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
         this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -88,8 +86,8 @@ public class MainDashBoadActivity extends BaseActivity
     int id = item.getItemId();
     if (id == R.id.profile) {
       startProfile();
-    } else if (id == R.id.nav_share) {
-
+    } else if (id == R.id.History) {
+      startHistory();
     } else if (id == R.id.nav_send) {
 
     } else if (id == R.id.Bookedservice) {
@@ -142,6 +140,12 @@ public class MainDashBoadActivity extends BaseActivity
     fragmentTransaction.commit();
   }
 
+  private void startHistory() {
+    FragmentTransaction fragmentTransaction = initFragments();
+    fragmentTransaction.replace(R.id.fragment_container, new CustomerHistoryFragment());
+    fragmentTransaction.commit();
+  }
+
   private void startProfile() {
     FragmentTransaction fragmentTransaction = initFragments();
     fragmentTransaction.replace(R.id.fragment_container, new CustomerProfileFragment());
@@ -150,5 +154,33 @@ public class MainDashBoadActivity extends BaseActivity
 
   public void initRecyclerView() {
 
+  }
+
+  //top layout navigation
+  @OnClick(R.id.bookinga) public void bookinga() {
+    startOrders();
+  }
+
+  @OnClick(R.id.bookinga) public void bookingw() {
+    startOrders();
+  }
+
+  @OnClick(R.id.servicesa) public void servicea() {
+    startHomeFragment();
+  }
+
+  @OnClick(R.id.servicesw) public void servicew() {
+    startHomeFragment();
+  }
+
+  @OnClick(R.id.salonsa) public void salonsa() {
+
+  }
+
+  @OnClick(R.id.salonsw) public void salonsw() {
+
+  }
+  @OnClick(R.id.drawerIcon) public void toggleDrawer(){
+    drawer.openDrawer(Gravity.LEFT);
   }
 }

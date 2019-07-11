@@ -60,8 +60,7 @@ public class CustomerOrderRecyclerAdapter
     myViewHolder.timeTv.setText(model.getTimebooked());
     myViewHolder.dateTv.setText(model.getDatebooked());
     myViewHolder.statusTv.setText(model.getStatus().toString());
-    Glide
-        .with(context)
+    Glide.with(context)
         .load(BuildConfig.BASE_URL + "view/images/" + model.getService().getAvatar())
         .centerCrop()
         .placeholder(R.drawable.image_holder)
@@ -69,6 +68,24 @@ public class CustomerOrderRecyclerAdapter
     myViewHolder.more.setOnClickListener(v -> {
       showPopup(model, v);
     });
+    switch (model.getStatus()) {
+      case 0:
+        myViewHolder.statusTv.setText("Pending");
+        myViewHolder.statusTv.setTextColor(context.getResources().getColor(R.color.colorAccent));
+        break;
+      case 1:
+        myViewHolder.statusTv.setText("Active");
+        myViewHolder.statusTv.setTextColor(context.getResources().getColor(R.color.colorAccent));
+        break;
+      case 2:
+        myViewHolder.statusTv.setText("Rejected");
+        myViewHolder.statusTv.setTextColor(context.getResources().getColor(R.color.colorAccent));
+        break;
+      case 3:
+        myViewHolder.statusTv.setText("closed");
+        myViewHolder.statusTv.setTextColor(context.getResources().getColor(R.color.colorAccent));
+        break;
+    }
   }
 
   public void showPopup(CustomerOrder customerOrder, View v) {
@@ -109,6 +126,6 @@ public class CustomerOrderRecyclerAdapter
   }
 
   public interface customerOrderAdapterInterface {
-      void cancelOrder(CustomerOrder customerOrder);
+    void cancelOrder(CustomerOrder customerOrder);
   }
 }

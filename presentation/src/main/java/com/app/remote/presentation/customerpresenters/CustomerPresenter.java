@@ -84,6 +84,14 @@ public class CustomerPresenter implements BasePresenter {
     }
   }
 
+  public void getHistory() {
+     compositeDisposable= RxUtil.initDisposables(compositeDisposable);
+         Disposable disposable= customerApiRepository.getHistory(getAccessToken())
+             .subscribeOn(Schedulers.io())
+             .observeOn(AndroidSchedulers.mainThread())
+             .subscribe(view::orders,view::handleError);
+             compositeDisposable.add(disposable);
+  }
 
   public interface MyView extends View {
     void requestLogin();

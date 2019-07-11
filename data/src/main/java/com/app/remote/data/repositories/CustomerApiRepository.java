@@ -54,4 +54,11 @@ public class CustomerApiRepository implements CustomerRepository {
     return customerApi.cancelOrder(accessToken, orderId)
         .map(OrderMapper::transform);
   }
+
+  @Override public Single<List<CustomerOrder>> getHistory(String accessToken) {
+    return customerApi.getCustomerOrdersClose(accessToken)
+        .flatMapPublisher(Flowable::fromIterable)
+        .map(CustomerOrderMapper::transform)
+        .toList();
+  }
 }

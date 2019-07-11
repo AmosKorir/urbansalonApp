@@ -13,21 +13,7 @@
       android:layout_height="wrap_content"
       android:theme="@style/AppTheme.AppBarOverlay"
       android:elevation="0dp"
-      >
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent"
-        android:elevation="0dp"
-        android:theme="@style/custom_toolbar"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:titleMarginTop="8dp"
-        app:titleTextColor="@color/colorPrimaryDark"
-        />
-
-  </android.support.design.widget.AppBarLayout>
+      />
 
   <include layout="@layout/content_main_dash_boad_activyity"/>
 

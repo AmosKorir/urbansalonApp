@@ -50,7 +50,7 @@ public class ServicesRecyclerViewAdapter
         .into(myViewHolder.imageView);
     myViewHolder.amount.setText(model.getPrice());
     myViewHolder.serviceName.setText(model.getName());
-    myViewHolder.bookBtn.setOnClickListener(v -> {
+    myViewHolder.itemView.setOnClickListener(v -> {
       orderInterface.serviceId(model.getServiceid());
     });
   }
@@ -60,7 +60,7 @@ public class ServicesRecyclerViewAdapter
   }
 
   public class MyViewHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.bookbtn) TextView bookBtn;
+    //@BindView(R.id.bookbtn) TextView bookBtn;
     @BindView(R.id.serviceName) TextView serviceName;
     @BindView(R.id.amount) TextView amount;
     @BindView(R.id.image) ImageView imageView;

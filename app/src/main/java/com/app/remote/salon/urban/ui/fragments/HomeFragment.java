@@ -27,7 +27,7 @@ public class HomeFragment extends BaseFragment
     implements ServicesPresenter.MyView, ServicesRecyclerViewAdapter.OrderInterface {
   private View view;
   @Inject ServicesPresenter servicesPresenter;
-  @BindView(R.id.serviceslist) RecyclerView serviceRecyclerView;
+  @BindView(R.id.serviceList) RecyclerView serviceRecyclerView;
   @BindView(R.id.recomended)RecyclerView recommendedRecyclerView;
   @Inject FragmentManager fragmentManager;
 

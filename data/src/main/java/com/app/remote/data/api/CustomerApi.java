@@ -4,7 +4,6 @@ import com.app.remote.data.models.CustomerApiResponse;
 import com.app.remote.data.models.OrderModelResponse;
 import com.app.remote.data.models.customerorders.CustomerOrderResponse;
 import com.app.remote.domain.constants.Constants;
-import com.app.remote.domain.models.OrderModel;
 import io.reactivex.Single;
 import java.util.List;
 import retrofit2.http.Field;
@@ -42,8 +41,12 @@ public interface CustomerApi {
   Single<CustomerApiResponse> getProfile(
       @Header(Constants.AUTHORIZATION) String accessToken);
 
-  @GET("order/customer")
+  @GET("order/customer/active")
   Single<List<CustomerOrderResponse>> getCustomerOrders(
+      @Header(Constants.AUTHORIZATION) String accessToken);
+
+  @GET("order/customer/closed")
+  Single<List<CustomerOrderResponse>> getCustomerOrdersClose(
       @Header(Constants.AUTHORIZATION) String accessToken);
 
   @POST("order/changeStatus")

@@ -25,4 +25,6 @@ public interface CustomerRepository {
   Single<List<CustomerOrder>> getCustomerOrder(String accessToken);
 
   Single<OrderModel> cancelOrder(String accessToken, String orderId);
+
+  Single<List<CustomerOrder>> getHistory(String accessToken);
 }
