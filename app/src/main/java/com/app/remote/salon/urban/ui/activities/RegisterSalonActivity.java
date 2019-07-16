@@ -1,5 +1,6 @@
 package com.app.remote.salon.urban.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import butterknife.BindView;
@@ -29,6 +30,11 @@ public class RegisterSalonActivity extends BaseActivity implements SalonRegister
     getUserInput();
   }
 
+  @OnClick(R.id.login) public void loginClicked() {
+    startActivity(new Intent(this, SalonLogin.class));
+    finish();
+  }
+
   private void getUserInput() {
     nameStr = nameEd.getText().toString().trim();
     phoneStr = phoneEd.getText().toString().trim();
@@ -42,7 +48,8 @@ public class RegisterSalonActivity extends BaseActivity implements SalonRegister
         && !confirmStr.isEmpty()
         && !locationStr.isEmpty()) {
       if (confirmStr.equals(passwordStr)) {
-          salonRegisterPresenter.createSalon(nameStr,phoneStr,passwordStr,locationStr,"0.0","0.0");
+        salonRegisterPresenter.createSalon(nameStr, phoneStr, passwordStr, locationStr, "0.0",
+            "0.0");
       } else {
         customToast(getString(R.string.password_not_match));
       }

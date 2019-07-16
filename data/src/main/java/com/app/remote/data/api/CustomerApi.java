@@ -48,8 +48,8 @@ public interface CustomerApi {
   @GET("order/customer/closed")
   Single<List<CustomerOrderResponse>> getCustomerOrdersClose(
       @Header(Constants.AUTHORIZATION) String accessToken);
-
-  @POST("order/changeStatus")
+@FormUrlEncoded
+  @POST("order/status")
   Single<OrderModelResponse> cancelOrder(@Header(Constants.AUTHORIZATION) String accessToken,
-      String orderId);
+      @Field("orderid") String orderId);
 }

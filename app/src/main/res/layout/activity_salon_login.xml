@@ -2,11 +2,10 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundGrey"
-    tools:context="com.app.remote.salon.urban.ui.activities.CustomerLoginActivity"
+
     >
 
   <TextView
@@ -16,7 +15,7 @@
       android:layout_marginLeft="44dp"
       android:layout_marginStart="44dp"
       android:layout_marginTop="112dp"
-      android:text="Login"
+      android:text="Salon Login"
       android:textColor="@color/primaryTextColor"
       android:textSize="30sp"
       app:layout_constraintStart_toStartOf="parent"

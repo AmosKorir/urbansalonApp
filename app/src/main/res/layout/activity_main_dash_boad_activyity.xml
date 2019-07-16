@@ -20,8 +20,12 @@
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       android:layout_gravity="start"
+      android:background="@color/colorAccent"
       android:fitsSystemWindows="true"
       app:headerLayout="@layout/nav_header_main_dash_boad_activyity"
+      app:itemIconTint="@color/greyColor"
+      app:itemTextAppearance="@style/TextAppearance.AppCompat.Small"
+      app:itemTextColor="@color/backgroundGrey"
       app:menu="@menu/activity_main_dash_boad_activyity_drawer"
       />
 

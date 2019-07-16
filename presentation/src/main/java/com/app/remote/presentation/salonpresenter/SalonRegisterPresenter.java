@@ -58,6 +58,18 @@ public class SalonRegisterPresenter implements BasePresenter {
     compositeDisposable.add(compositeDisposable);
   }
 
+  public void loginUser(String phone, String password) {
+    compositeDisposable = RxUtil.initDisposables(compositeDisposable);
+    Disposable disposable = salonRepository.loginUser(phone, password)
+        .subscribeOn(Schedulers.io())
+        .subscribe(s -> {
+          saveAccessToken(s.getAccesstoken());
+          view.success(s);
+        }, view::handleError);
+    compositeDisposable.add(disposable);
+    compositeDisposable.add(disposable);
+  }
+
   public interface MyView extends View {
 
     void success(SalonModel salonModel);

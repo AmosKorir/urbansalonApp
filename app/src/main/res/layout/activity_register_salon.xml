@@ -86,14 +86,19 @@
       />
   <Button
       android:id="@+id/registerBtn"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="16dp"
-      android:layout_marginEnd="9dp"
-      android:layout_marginRight="9dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="46dp"
+      android:background="@color/colorAccent"
       android:text="Register"
-      app:layout_constraintBottom_toBottomOf="parent"
+      android:textColor="@android:color/white"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textInputLayout9"
       />
   <android.support.design.widget.TextInputLayout
       android:id="@+id/textInputLayout4"
@@ -117,6 +122,7 @@
         />
   </android.support.design.widget.TextInputLayout>
   <android.support.design.widget.TextInputLayout
+      android:id="@+id/textInputLayout9"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginEnd="8dp"
@@ -136,4 +142,20 @@
         android:hint="Confirm password"
         />
   </android.support.design.widget.TextInputLayout>
+  <TextView
+      android:id="@+id/login"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="33dp"
+      android:text="Proced To Login"
+      android:textColor="@color/colorAccent"
+      android:textSize="24sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/registerBtn"
+      />
 </android.support.constraint.ConstraintLayout>

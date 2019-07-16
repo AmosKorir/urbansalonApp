@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundGrey"
     tools:context="com.app.remote.salon.urban.ui.activities.CustomerRegisterActivity"
     >
 
@@ -56,14 +57,18 @@
       />
   <Button
       android:id="@+id/registerBtn"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
-      android:background="@drawable/button_line_primary"
+      android:layout_marginEnd="32dp"
+      android:layout_marginLeft="32dp"
+      android:layout_marginRight="32dp"
+      android:layout_marginStart="32dp"
+      android:layout_marginTop="40dp"
+      android:background="@color/colorAccent"
       android:text="Register"
-      android:textColor="@color/colorAccent"
+      android:textColor="@android:color/white"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.736"
+      app:layout_constraintHorizontal_bias="0.442"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/confirmpassword"
       />
@@ -75,8 +80,8 @@
       android:layout_marginStart="55dp"
       android:layout_marginTop="115dp"
       android:text="Register"
-      android:textColor="@color/colorAccent"
-      android:textSize="24sp"
+      android:textColor="@color/primaryTextColor"
+      android:textSize="30sp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       />

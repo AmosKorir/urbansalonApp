@@ -4,6 +4,8 @@ import com.app.remote.domain.models.SalonModel;
 import com.app.remote.domain.models.Service;
 import com.app.remote.domain.models.Sucess;
 import com.app.remote.domain.models.customerOrders.CustomerOrder;
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 import java.io.File;
 import java.util.List;
@@ -26,4 +28,14 @@ public interface SalonRepository {
 
   
   Single<Sucess> setOrderStatus(String accessToken, Integer orderid, int i);
+
+  Single<List<Service>> getRecommended(String accessToken);
+
+  Single<List<CustomerOrder>> getClosedOrders(String accessToken);
+
+  Single<List<CustomerOrder>>getPendingOrders(String accessToken);
+
+  Single<List<CustomerOrder>>getRejectedOrders(String accesstoken);
+
+  Single<SalonModel> loginUser(String phone, String password);
 }

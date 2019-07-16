@@ -21,8 +21,11 @@
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       android:layout_gravity="start"
+      android:background="@color/colorAccent"
       android:fitsSystemWindows="true"
       app:headerLayout="@layout/nav_header_salon_dash_board"
+      app:itemIconTint="@android:color/white"
+      app:itemTextColor="@android:color/white"
       app:menu="@menu/activity_salon_dash_board_drawer"
       />
 

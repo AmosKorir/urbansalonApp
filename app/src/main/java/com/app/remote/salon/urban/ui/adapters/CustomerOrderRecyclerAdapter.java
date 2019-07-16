@@ -15,9 +15,14 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.app.remote.data.BuildConfig;
+import com.app.remote.domain.constants.Constants;
 import com.app.remote.domain.models.customerOrders.CustomerOrder;
+import com.app.remote.domain.utils.DateTimeUtils;
+import com.app.remote.domain.utils.TimeAgo;
 import com.app.remote.salon.urban.R;
 import com.bumptech.glide.Glide;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,13 +60,14 @@ public class CustomerOrderRecyclerAdapter
   @Override public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
     CustomerOrder model = customerOrders.get(i);
     myViewHolder.serviceName.setText(model.getService().getName());
+    myViewHolder.orderNumber.setText(model.getOrderno());
     myViewHolder.salonNameTv.setText(model.getService().getSalon().getName());
     myViewHolder.priceTv.setText(model.getService().getPrice().toString());
     myViewHolder.timeTv.setText(model.getTimebooked());
-    myViewHolder.dateTv.setText(model.getDatebooked());
+    myViewHolder.dateTv.setText(DateTimeUtils.formatDate(model.getDatebooked()));
     myViewHolder.statusTv.setText(model.getStatus().toString());
     Glide.with(context)
-        .load(BuildConfig.BASE_URL + "view/images/" + model.getService().getAvatar())
+        .load(Constants.IMAGE_URL + model.getService().getAvatar())
         .centerCrop()
         .placeholder(R.drawable.image_holder)
         .into(myViewHolder.avatar);
@@ -98,7 +104,7 @@ public class CustomerOrderRecyclerAdapter
       @Override public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.cancel_action) {
-          Toast.makeText(context, "cancelled", Toast.LENGTH_SHORT).show();
+        customerOrderAdapterInterface.cancelOrder(customerOrder);
         }
         return false;
       }
@@ -115,6 +121,7 @@ public class CustomerOrderRecyclerAdapter
     @BindView(R.id.service) TextView serviceName;
     @BindView(R.id.date) TextView dateTv;
     @BindView(R.id.time) TextView timeTv;
+    @BindView(R.id.orderNumber)TextView orderNumber;
     @BindView(R.id.avatar) ImageView avatar;
     @BindView(R.id.more) ImageView more;
     @BindView(R.id.price) TextView priceTv;

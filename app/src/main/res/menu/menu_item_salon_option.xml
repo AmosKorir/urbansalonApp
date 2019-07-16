@@ -12,4 +12,10 @@
       android:title="Cancel"
       app:showAsAction="never"/>
 
+  <item
+      android:id="@+id/close_action"
+      android:orderInCategory="100"
+      android:title="Close service"
+      app:showAsAction="never"/>
+
 </menu>

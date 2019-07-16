@@ -52,7 +52,7 @@ public class SalonOrderRecyclerAdapter
         .placeholder(R.drawable.image_holder)
         .into(myViewHolder.avatar);
     myViewHolder.serviceNameTV.setText(model.getService().getName());
-    myViewHolder.priceTv.setText(model.getService().getPrice().toString());
+    myViewHolder.priceTv.setText(model.getStatus().toString());
     myViewHolder.dateTv.setText(TimeAgo.covertTimeToText(model.getDatebooked()));
     myViewHolder.timeTv.setText(model.getTimebooked());
     myViewHolder.nameTv.setText(model.getCustomer().getName());
@@ -86,8 +86,10 @@ public class SalonOrderRecyclerAdapter
     popup.setOnMenuItemClickListener(item -> {
       int id = item.getItemId();
       if (id == R.id.cancel_action) {
-        salonOrderInterface.setOrderStatus(customerOrder,1);
+        salonOrderInterface.setOrderStatus(customerOrder,3);
       }else if (id==R.id.accept_action){
+        salonOrderInterface.setOrderStatus(customerOrder,1);
+      }else if(id==R.id.close_action){
         salonOrderInterface.setOrderStatus(customerOrder,2);
       }
       return false;

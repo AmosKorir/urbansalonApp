@@ -1,5 +1,6 @@
 package com.app.remote.salon.urban.ui.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import butterknife.ButterKnife;
 import com.app.remote.data.utils.RxUtil;
-import com.app.remote.domain.constants.Constants;
 import com.app.remote.domain.constants.DIConstants;
 import com.app.remote.salon.urban.di.activity.ActivityComponent;
 import com.app.remote.salon.urban.di.fragment.FragmentComponent;
@@ -29,6 +29,7 @@ public class BaseFragment extends Fragment {
   @Inject @Named(DIConstants.ACTIVITY) Context context;
   private static final int NO_LAYOUT = -1;
   private CompositeDisposable compositeDisposable;
+  private ProgressDialog progressDialog;
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,7 +93,17 @@ public class BaseFragment extends Fragment {
 
   }
 
+  public void showProgress(String message) {
+    progressDialog = new ProgressDialog(context);
+    progressDialog.setMessage(message + "....");
+    progressDialog.show();
+  }
 
+  public void dismissProgressDialog() {
+    if (progressDialog != null) {
+      progressDialog.dismiss();
+    }
+  }
 
   protected void dispose() {
     RxUtil.dispose(compositeDisposable);

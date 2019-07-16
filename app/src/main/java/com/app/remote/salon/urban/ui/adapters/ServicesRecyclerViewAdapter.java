@@ -11,6 +11,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.app.remote.data.BuildConfig;
+import com.app.remote.domain.constants.Constants;
 import com.app.remote.domain.models.Service;
 import com.app.remote.salon.urban.R;
 import com.bumptech.glide.Glide;
@@ -44,7 +45,7 @@ public class ServicesRecyclerViewAdapter
     Service model = services.get(i);
     Glide
         .with(context)
-        .load(BuildConfig.BASE_URL+"view/images/"+model.getAvatar())
+        .load(Constants.IMAGE_URL+model.getAvatar())
         .centerCrop()
         .placeholder(R.drawable.image_holder)
         .into(myViewHolder.imageView);

@@ -5,19 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundGrey"
     tools:context="com.app.remote.salon.urban.ui.activities.AddSearvicActivity"
     >
   <android.support.v7.widget.Toolbar
       android:id="@+id/toolbar"
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
-      android:background="?attr/colorPrimary"
+      android:background="@android:color/transparent"
       app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:popupTheme="@style/AppTheme.PopupOverlay"
-      app:titleTextColor="@android:color/white"
+      app:titleTextColor="@color/colorAccent"
       />
   <android.support.constraint.ConstraintLayout
       android:id="@+id/constraintLayout"
@@ -61,6 +62,7 @@
           />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout8"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -83,14 +85,17 @@
     </android.support.design.widget.TextInputLayout>
     <Button
         android:id="@+id/createBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="36dp"
         android:text="Create Service"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout8"
         style="@style/Widget.MaterialComponents.Button"
         />
     <TextView

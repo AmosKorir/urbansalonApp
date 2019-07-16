@@ -39,24 +39,24 @@ public class ServicesPresenter implements BasePresenter {
     return sharedPreferences.getString(Constants.ACCESS_SALON, null);
   }
 
-  public void createOrder(String name, String price,File file) {
+  public void createOrder(String name, String price, File file) {
     compositeDisposable = RxUtil.initDisposables(compositeDisposable);
     Disposable disposable = salonApiRepository.createService(getAccessToken(), name, price)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(s->{
-          uploadServiceImage(file,s.getServiceid());
+        .subscribe(s -> {
+          uploadServiceImage(file, s.getServiceid());
         }, view::handleError);
     compositeDisposable.add(disposable);
   }
 
-  public void uploadServiceImage(File imageFile,String serviceId){
-     compositeDisposable= RxUtil.initDisposables(compositeDisposable);
-         Disposable disposable= salonApiRepository.uploadServicImage(imageFile,serviceId)
-             .subscribeOn(Schedulers.io())
-             .observeOn(AndroidSchedulers.mainThread())
-             .subscribe(view::sucess,view::handleError);
-             compositeDisposable.add(disposable);
+  public void uploadServiceImage(File imageFile, String serviceId) {
+    compositeDisposable = RxUtil.initDisposables(compositeDisposable);
+    Disposable disposable = salonApiRepository.uploadServicImage(imageFile, serviceId)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(view::sucess, view::handleError);
+    compositeDisposable.add(disposable);
   }
 
   @Override public void dispose() {
@@ -64,12 +64,21 @@ public class ServicesPresenter implements BasePresenter {
   }
 
   public void getAllServices() {
-     compositeDisposable= RxUtil.initDisposables(compositeDisposable);
-         Disposable disposable= salonApiRepository.getAllServices(getAccessToken())
-             .subscribeOn(Schedulers.io())
-             .observeOn(AndroidSchedulers.mainThread())
-             .subscribe(view::services,view::handleError);
-             compositeDisposable.add(disposable);
+    compositeDisposable = RxUtil.initDisposables(compositeDisposable);
+    Disposable disposable = salonApiRepository.getAllServices(getAccessToken())
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(view::services, view::handleError);
+    compositeDisposable.add(disposable);
+  }
+
+  public void getRecommendation() {
+    compositeDisposable = RxUtil.initDisposables(compositeDisposable);
+    Disposable disposable = salonApiRepository.getRecommended(getAccessToken())
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(view::services, view::handleError);
+    compositeDisposable.add(disposable);
   }
 
   public interface MyView extends View {

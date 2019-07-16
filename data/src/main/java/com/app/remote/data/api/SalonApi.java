@@ -5,6 +5,7 @@ import com.app.remote.data.models.ServiceAPiResponse;
 import com.app.remote.data.models.SuccessApiResponse;
 import com.app.remote.data.models.customerorders.CustomerOrderResponse;
 import com.app.remote.domain.constants.Constants;
+import com.app.remote.domain.models.SalonModel;
 import io.reactivex.Single;
 import java.util.List;
 import okhttp3.RequestBody;
@@ -46,12 +47,32 @@ public interface SalonApi {
   @POST("image/upload/service")
   Single<SuccessApiResponse> uploadServiceImage(@Body RequestBody body);
 
-  @GET("order/salon")
+  @FormUrlEncoded
+  @POST("order/status")
+  Single<SuccessApiResponse> setOrderStatus(@Header(Constants.AUTHORIZATION) String accessToken,
+      @Field("orderid") Integer orderid, @Field("status") int i);
+
+  @GET("service/all")
+  Single<List<ServiceAPiResponse>> getRecommended(
+      @Header(Constants.AUTHORIZATION) String accessToken);
+
+  @GET("order/salon/active")
   Single<List<CustomerOrderResponse>> getActiveOrders(
       @Header(Constants.AUTHORIZATION) String accessToken);
 
+  @GET("order/salon/closed")
+  Single<List<CustomerOrderResponse>> getClosedOrders(
+      @Header(Constants.AUTHORIZATION) String accessToken);
+
+  @GET("order/salon/rejected")
+  Single<List<CustomerOrderResponse>> getRejectedOrders(
+      @Header(Constants.AUTHORIZATION) String accessToken);
+
+  @GET("order/salon/pending")
+  Single<List<CustomerOrderResponse>> getPendingOrders(
+      @Header(Constants.AUTHORIZATION) String accessToken);
+
   @FormUrlEncoded
-  @PUT("order/status")
-  Single<SuccessApiResponse> setOrderStatus(@Header(Constants.AUTHORIZATION) String accessToken,
-      @Field("orderid") Integer orderid, @Field("status") int i);
+  @POST("salon/login")
+  Single<SalonModel> login(@Field("phone") String phone, @Field("password") String password);
 }

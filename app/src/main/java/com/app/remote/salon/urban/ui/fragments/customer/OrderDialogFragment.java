@@ -120,7 +120,7 @@ public class OrderDialogFragment extends BaseBottomSheetFragment implements Cust
       };
 
   private void showDate(int year, int month, int day) {
-    dateTxt.setText(day + "/" + month + "/" + year);
+    dateTxt.setText(year+"/"+month+"/"+day);
   }
 
   @Override

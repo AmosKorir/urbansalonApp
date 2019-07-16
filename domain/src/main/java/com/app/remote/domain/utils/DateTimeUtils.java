@@ -22,6 +22,20 @@ public class DateTimeUtils {
     return today.minusDays(count).toString("YYYY-MM-dd HH");
   }
 
+  public static String formatDate(String date) {
+
+    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+    try {
+      Date inputDate = inputFormat.parse(date);
+      String formattedDate = outputFormat.format(inputDate);
+      return formattedDate;
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    return Constants.EMPTY_STRING;
+  }
+
   public static long getTimeStamp(String date) {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Date date1;

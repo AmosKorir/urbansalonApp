@@ -54,7 +54,7 @@ public class HomeFragment extends BaseFragment
     super.onStart();
     servicesPresenter.setView(this);
     initRecyclers();
-    servicesPresenter.getAllServices();
+    servicesPresenter.getRecommendation();
   }
 
   private void initRecyclers() {

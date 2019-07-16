@@ -33,7 +33,7 @@ public class BaseActivity extends AppCompatActivity {
 
   public void handleError(Throwable throwable) {
     dismissProgressDialog();
-    Toast.makeText(getBaseContext(), throwable.getMessage(), Toast.LENGTH_LONG).show();
+    Toast.makeText(getBaseContext(), "Error"+ throwable.getMessage(), Toast.LENGTH_LONG).show();
   }
 
   @Override protected void onStart() {

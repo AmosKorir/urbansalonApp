@@ -69,4 +69,36 @@ public class SalonApiRepository implements SalonRepository {
     return salonApi.setOrderStatus(accessToken, orderid, i)
         .map(SuccessMapper::transform);
   }
+
+  @Override public Single<List<Service>> getRecommended(String accessToken) {
+    return salonApi.getRecommended(accessToken)
+        .flatMapPublisher(Flowable::fromIterable)
+        .map(ServiceMapper::transform)
+        .toList();
+  }
+
+  @Override public Single<List<CustomerOrder>> getClosedOrders(String accessToken) {
+    return salonApi.getClosedOrders(accessToken)
+        .flatMapPublisher(Flowable::fromIterable)
+        .map(CustomerOrderMapper::transform)
+        .toList();
+  }
+
+  @Override public Single<List<CustomerOrder>> getPendingOrders(String accessToken) {
+    return salonApi.getPendingOrders(accessToken)
+        .flatMapPublisher(Flowable::fromIterable)
+        .map(CustomerOrderMapper::transform)
+        .toList();
+  }
+
+  @Override public Single<List<CustomerOrder>> getRejectedOrders(String accesstoken) {
+    return salonApi.getRejectedOrders(accesstoken)
+        .flatMapPublisher(Flowable::fromIterable)
+        .map(CustomerOrderMapper::transform)
+        .toList();
+  }
+
+  @Override public Single<SalonModel> loginUser(String phone, String password) {
+    return salonApi.login(phone,password);
+  }
 }
