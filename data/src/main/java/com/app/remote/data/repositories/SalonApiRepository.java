@@ -1,10 +1,12 @@
 package com.app.remote.data.repositories;
 
 import com.app.remote.data.api.SalonApi;
+import com.app.remote.data.mappers.AnalytiMapper;
 import com.app.remote.data.mappers.CustomerOrderMapper;
 import com.app.remote.data.mappers.SalonMapper;
 import com.app.remote.data.mappers.ServiceMapper;
 import com.app.remote.data.mappers.SuccessMapper;
+import com.app.remote.domain.models.AnalyticModel;
 import com.app.remote.domain.models.SalonModel;
 import com.app.remote.domain.models.Service;
 import com.app.remote.domain.models.Sucess;
@@ -99,6 +101,41 @@ public class SalonApiRepository implements SalonRepository {
   }
 
   @Override public Single<SalonModel> loginUser(String phone, String password) {
-    return salonApi.login(phone,password);
+    return salonApi.login(phone, password);
+  }
+
+  @Override public Single<List<AnalyticModel>> getSevenDays(String accessToken) {
+    return salonApi.getSevenDay(accessToken)
+        .flatMapPublisher(Flowable::fromIterable)
+        .map(AnalytiMapper::transform)
+        .toList();
+  }
+
+  @Override public Single<List<SalonModel>> getSalons() {
+    return salonApi.getSalons()
+        .flatMapPublisher(Flowable::fromIterable)
+        .map(SalonMapper::transform)
+        .toList();
+  }
+
+  @Override public Single<SalonModel> getsalonSelf(String accessToken) {
+    return salonApi.getSalonSelf(accessToken)
+        .map(SalonMapper::transform);
+  }
+
+  @Override public Single<Sucess> updateSalon(String accessToken, String opening, String closing,
+      String avilabity) {
+    return salonApi.updateSalon(accessToken,opening,closing,avilabity)
+        .map(SuccessMapper::transform);
+  }
+
+  @Override public Single<Sucess> uploadProfile(String accessToken, File imageFile) {
+    MultipartBody.Builder builder = new MultipartBody.Builder();
+    builder.setType(MultipartBody.FORM);
+    builder.addFormDataPart("file", imageFile.getName(),
+        RequestBody.create(MediaType.parse("image/*"), imageFile));
+    MultipartBody requestBody = builder.build();
+    return salonApi.uploadProfile(requestBody,accessToken)
+        .map(SuccessMapper::transform);
   }
 }

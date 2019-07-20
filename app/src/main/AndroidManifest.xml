@@ -35,7 +35,9 @@
         android:name=".ui.activities.CustomerRegisterActivity"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
     </activity>
-    <activity android:name=".ui.activities.SalonDetailsActivity">
+    <activity
+        android:theme="@style/AppTheme.NoActionBar"
+        android:name=".ui.activities.SalonDetailsActivity">
     </activity>
     <activity
         android:name=".ui.activities.MainDashBoadActivity"

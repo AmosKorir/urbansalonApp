@@ -21,6 +21,7 @@ public class Constants {
   public static final String SERVICEID = "serviceid";
   public static final String IMAGE_URL =
       "http://storage.googleapis.com/mapenzi-1481b.appspot.com/directory/images/";
+  public static final String SALON_MODE = "salonMode";
   public static String COMMA = ",";
   public static String EMPTY_STRING = "";
 }

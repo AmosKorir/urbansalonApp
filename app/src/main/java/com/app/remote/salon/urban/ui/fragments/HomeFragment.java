@@ -28,7 +28,7 @@ public class HomeFragment extends BaseFragment
   private View view;
   @Inject ServicesPresenter servicesPresenter;
   @BindView(R.id.serviceList) RecyclerView serviceRecyclerView;
-  @BindView(R.id.recomended)RecyclerView recommendedRecyclerView;
+  @BindView(R.id.recomended) RecyclerView recommendedRecyclerView;
   @Inject FragmentManager fragmentManager;
 
   public HomeFragment() {
@@ -67,10 +67,12 @@ public class HomeFragment extends BaseFragment
 
   @Override public void services(List<Service> services) {
     serviceRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-    recommendedRecyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false));
+    recommendedRecyclerView.setLayoutManager(
+        new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
     serviceRecyclerView.setAdapter(new ServicesRecyclerViewAdapter(context, services, this,
         R.layout.item_salon_service));
-    recommendedRecyclerView.setAdapter(new ServicesRecyclerViewAdapter(context,services,this,R.layout.item_recommended_layout));
+    recommendedRecyclerView.setAdapter(
+        new ServicesRecyclerViewAdapter(context, services, this, R.layout.item_recommended_layout));
   }
 
   @Override public void sucess(Sucess sucess) {
@@ -79,8 +81,6 @@ public class HomeFragment extends BaseFragment
 
   @Override public void serviceId(String serviceid) {
     OrderDialogFragment orderDialogFragment = OrderDialogFragment.newInstance(serviceid);
-    //orderDialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Dialog_FullScreen);
-
     orderDialogFragment.show(fragmentManager, "Order the Service");
   }
 }

@@ -1,5 +1,6 @@
 package com.app.remote.domain.repositories;
 
+import com.app.remote.domain.models.AnalyticModel;
 import com.app.remote.domain.models.SalonModel;
 import com.app.remote.domain.models.Service;
 import com.app.remote.domain.models.Sucess;
@@ -14,6 +15,8 @@ import java.util.List;
  * Created by Korir on 6/2/19.
  * amoskrr@gmail.com
  */
+
+
 public interface SalonRepository {
   Single<SalonModel> registerSalon(String name, String phone, String password, String location,
       String latitude, String longitude);
@@ -38,4 +41,14 @@ public interface SalonRepository {
   Single<List<CustomerOrder>>getRejectedOrders(String accesstoken);
 
   Single<SalonModel> loginUser(String phone, String password);
+
+  Single<List<AnalyticModel>> getSevenDays(String accessToken);
+
+  Single<List<SalonModel>> getSalons();
+
+  Single<SalonModel> getsalonSelf(String accessToken);
+
+  Single<Sucess> updateSalon(String accessToken, String opening, String closing, String avilabity);
+
+  Single<Sucess> uploadProfile(String accessToken, File imageFile);
 }

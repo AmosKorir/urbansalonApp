@@ -1,13 +1,16 @@
 package com.app.remote.data.api;
 
+import com.app.remote.data.models.AnalyticApiResponse;
 import com.app.remote.data.models.SalonApiResponse;
 import com.app.remote.data.models.ServiceAPiResponse;
 import com.app.remote.data.models.SuccessApiResponse;
 import com.app.remote.data.models.customerorders.CustomerOrderResponse;
 import com.app.remote.domain.constants.Constants;
 import com.app.remote.domain.models.SalonModel;
+import com.app.remote.domain.models.Sucess;
 import io.reactivex.Single;
 import java.util.List;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -15,7 +18,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 
 /**
  * Created by Korir on 6/2/19.
@@ -75,4 +77,24 @@ public interface SalonApi {
   @FormUrlEncoded
   @POST("salon/login")
   Single<SalonModel> login(@Field("phone") String phone, @Field("password") String password);
+
+  @GET("analytic/seven")
+  Single<List<AnalyticApiResponse>> getSevenDay(
+      @Header(Constants.AUTHORIZATION) String accessToken);
+
+  @GET("salon/all")
+  Single<List<SalonApiResponse>> getSalons();
+
+  @GET("salon/get_salon")
+  Single<SalonApiResponse> getSalonSelf(@Header(Constants.AUTHORIZATION) String accessToken);
+
+  @FormUrlEncoded
+  @POST("salon/update")
+  Single<SuccessApiResponse> updateSalon(@Header(Constants.AUTHORIZATION) String accessToken,
+      @Field("opening") String opening,
+      @Field("closing") String closing,
+      @Field("status") String availability);
+  @FormUrlEncoded
+  @POST("upload/salon")
+  Single<SuccessApiResponse> uploadProfile(@Body MultipartBody requestBody, @Header(Constants.AUTHORIZATION)String accessToken);
 }

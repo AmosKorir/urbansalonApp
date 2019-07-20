@@ -13,6 +13,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.app.remote.data.BuildConfig;
+import com.app.remote.domain.constants.Constants;
 import com.app.remote.domain.models.Service;
 import com.app.remote.salon.urban.R;
 import com.app.remote.salon.urban.ui.fragments.sallon.ServicesFragment;
@@ -46,7 +47,7 @@ public class SalonServicesAdapter extends RecyclerView.Adapter<SalonServicesAdap
     myViewHolder.amountTv.setText(service.getPrice());
     Glide
         .with(context)
-        .load(BuildConfig.BASE_URL+"view/images/"+service.getAvatar())
+        .load(Constants.IMAGE_URL+service.getAvatar())
         .centerCrop()
         .placeholder(R.drawable.image_holder)
         .into(myViewHolder.imageView);

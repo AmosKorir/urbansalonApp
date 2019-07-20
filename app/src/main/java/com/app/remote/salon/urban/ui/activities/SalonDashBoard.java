@@ -1,9 +1,13 @@
 package com.app.remote.salon.urban.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -13,17 +17,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import com.app.remote.presentation.salonpresenter.SalonProfilePresenter;
 import com.app.remote.presentation.salonpresenter.ServicesPresenter;
 import com.app.remote.salon.urban.R;
+import com.app.remote.salon.urban.ui.fragments.sallon.AnalyticFragment;
 import com.app.remote.salon.urban.ui.fragments.sallon.OrderSFragment;
+import com.app.remote.salon.urban.ui.fragments.sallon.SalonProfile;
 import com.app.remote.salon.urban.ui.fragments.sallon.ServicesFragment;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import javax.inject.Inject;
 
 public class SalonDashBoard extends BaseActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+    implements NavigationView.OnNavigationItemSelectedListener, SalonProfile.ProfileInterface {
+  private static final int IMAGE_CODE = 400;
   @Inject FragmentManager fragmentManager;
   @Inject ServicesPresenter servicesPresenter;
-
+  private SalonProfile salonProfile;
+  private File imageFile;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -95,13 +108,15 @@ public class SalonDashBoard extends BaseActivity
     if (id == R.id.Orders) {
       startActiveOrders();
     } else if (id == R.id.services) {
-
+      startSalonSerVice();
     } else if (id == R.id.profile) {
-
+      startSalonProfile();
     } else if (id == R.id.nav_share) {
 
     } else if (id == R.id.nav_send) {
 
+    } else if (id == R.id.analytics) {
+      startAnalytic();
     }
 
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -117,6 +132,7 @@ public class SalonDashBoard extends BaseActivity
     if (accessToken == null) {
       startActivity(new Intent(this, RegisterSalonActivity.class));
     }
+    salonProfile = new SalonProfile();
   }
 
   //init fragment management
@@ -138,5 +154,50 @@ public class SalonDashBoard extends BaseActivity
     FragmentTransaction fragmentTransaction = initFragments();
     fragmentTransaction.replace(R.id.fragment_container, new OrderSFragment());
     fragmentTransaction.commit();
+  }
+
+  private void startAnalytic() {
+    FragmentTransaction fragmentTransaction = initFragments();
+    fragmentTransaction.replace(R.id.fragment_container, new AnalyticFragment());
+    fragmentTransaction.commit();
+  }
+
+  private void startSalonProfile() {
+    salonProfile.setProfileInterface(this);
+    salonProfile.setStyle(DialogFragment.STYLE_NORMAL, R.style.Dialog_FullScreen);
+    salonProfile.show(fragmentManager, "profile");
+  }
+
+  @Override public void getProfileImage() {
+    Intent intent = new Intent(Intent.ACTION_PICK);
+    intent.setType("image/*");
+    startActivityForResult(intent, IMAGE_CODE);
+  }
+  @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (data != null) {
+      try {
+        Uri imageUri = data.getData();
+        Bitmap thumbnail =
+            MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+       salonProfile.setImageBitmap(thumbnail);
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        File destination = new File(getCacheDir(), "temp.jpg");
+        FileOutputStream fo;
+        try {
+          fo = new FileOutputStream(destination);
+          fo.write(bytes.toByteArray());
+          fo.close();
+          imageFile = destination;
+          salonProfile.upload(imageFile);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      } catch (Exception e) {
+      }
+    } else {
+      customToast("Failed to get the image");
+    }
   }
 }

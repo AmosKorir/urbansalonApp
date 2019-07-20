@@ -21,6 +21,7 @@ import com.app.remote.salon.urban.ui.fragments.HomeFragment;
 import com.app.remote.salon.urban.ui.fragments.customer.CustomerHistoryFragment;
 import com.app.remote.salon.urban.ui.fragments.customer.CustomerOrderFragment;
 import com.app.remote.salon.urban.ui.fragments.customer.CustomerProfileFragment;
+import com.app.remote.salon.urban.ui.fragments.customer.SalonsFragments;
 import javax.inject.Inject;
 
 public class MainDashBoadActivity extends BaseActivity
@@ -148,13 +149,16 @@ public class MainDashBoadActivity extends BaseActivity
   }
 
   private void startProfile() {
-    //FragmentTransaction fragmentTransaction = initFragments();
-    //fragmentTransaction.replace(R.id.fragment_container, new CustomerProfileFragment());
-    //fragmentTransaction.commit();
     CustomerProfileFragment customerProfileFragment=new CustomerProfileFragment();
     customerProfileFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Dialog_FullScreen);
     customerProfileFragment.show(fragmentManager,"profile");
   }
+  private void  startSalons(){
+    FragmentTransaction fragmentTransaction = initFragments();
+    fragmentTransaction.replace(R.id.fragment_container, new SalonsFragments());
+    fragmentTransaction.commit();
+  }
+
 
   public void initRecyclerView() {
 
@@ -178,7 +182,7 @@ public class MainDashBoadActivity extends BaseActivity
   }
 
   @OnClick(R.id.salonsa) public void salonsa() {
-
+    startSalons();
   }
 
   @OnClick(R.id.salonsw) public void salonsw() {

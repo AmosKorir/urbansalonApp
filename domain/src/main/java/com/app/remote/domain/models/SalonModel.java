@@ -1,10 +1,12 @@
 package com.app.remote.domain.models;
 
+import java.io.Serializable;
+
 /**
  * Created by Korir on 6/2/19.
  * amoskrr@gmail.com
  */
-public class SalonModel {
+public class SalonModel implements Serializable {
 
   private String name;
   private String phone;

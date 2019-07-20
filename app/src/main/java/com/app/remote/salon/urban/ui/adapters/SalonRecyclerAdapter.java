@@ -2,13 +2,15 @@ package com.app.remote.salon.urban.ui.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
-import com.app.remote.domain.models.customerOrders.CustomerOrder;
+import com.app.remote.domain.constants.Constants;
+import com.app.remote.domain.models.SalonModel;
 import com.app.remote.salon.urban.R;
 import com.app.remote.salon.urban.ui.activities.SalonDetailsActivity;
 import java.util.List;
@@ -19,12 +21,12 @@ import java.util.List;
  */
 public class SalonRecyclerAdapter extends RecyclerView.Adapter<SalonRecyclerAdapter.MyViewHolder> {
   private Context context;
-  private List<CustomerOrder> customerOrders;
+  private List<SalonModel> salonModels;
 
   public SalonRecyclerAdapter(Context context,
-      List<CustomerOrder> customerOrders) {
+      List<SalonModel> salonModels) {
     this.context = context;
-    this.customerOrders = customerOrders;
+    this.salonModels = salonModels;
   }
 
   @NonNull @Override public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -34,12 +36,15 @@ public class SalonRecyclerAdapter extends RecyclerView.Adapter<SalonRecyclerAdap
 
   @Override public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
     myViewHolder.itemView.setOnClickListener(v -> {
-      context.startActivity(new Intent(context, SalonDetailsActivity.class));
+
+      context.startActivity(new Intent(context, SalonDetailsActivity.class)
+          .putExtra(Constants.SALON_MODE,salonModels.get(i))
+      );
     });
   }
 
   @Override public int getItemCount() {
-    return customerOrders.size();
+    return salonModels.size();
   }
 
   public class MyViewHolder extends RecyclerView.ViewHolder {
