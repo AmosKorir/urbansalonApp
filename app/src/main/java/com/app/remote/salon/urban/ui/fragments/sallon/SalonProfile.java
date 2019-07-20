@@ -1,5 +1,6 @@
 package com.app.remote.salon.urban.ui.fragments.sallon;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.app.remote.domain.constants.Constants;
+import com.app.remote.domain.constants.DIConstants;
 import com.app.remote.domain.models.SalonModel;
 import com.app.remote.domain.models.Sucess;
 import com.app.remote.presentation.salonpresenter.SalonProfilePresenter;
@@ -24,12 +26,14 @@ import com.app.remote.salon.urban.ui.fragments.BaseDialogFragment;
 import com.bumptech.glide.Glide;
 import java.io.File;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SalonProfile extends BaseDialogFragment implements SalonProfilePresenter.MyView {
   @Inject SalonProfilePresenter salonProfilePresenter;
+  @Inject @Named(DIConstants.ACTIVITY) Context context;
   @BindView(R.id.name) TextView nameTv;
   @BindView(R.id.profileImage) ImageView profileImage;
   @BindView(R.id.openingtime) EditText opening;
@@ -109,10 +113,10 @@ public class SalonProfile extends BaseDialogFragment implements SalonProfilePres
     nameTv.setText(salonModel.getName());
     phoneTv.setText(salonModel.getPhone());
     town.setText(salonModel.getLocation());
-    Glide.with(getContext())
+    Glide.with(context)
         .load(Constants.IMAGE_URL + salonModel.getAvatar())
-        .centerCrop()
-        .placeholder(R.drawable.image_holder)
+        .circleCrop()
+        .placeholder(R.drawable.circleuser)
         .into(profileImage);
     try {
       opening.setText(salonModel.getOpeningtime());
@@ -139,6 +143,7 @@ public class SalonProfile extends BaseDialogFragment implements SalonProfilePres
 
   public void upload(File imageFile) {
     showProgress("Setting profile");
+    customToast("upl");
     salonProfilePresenter.uploadProfile(imageFile);
   }
 

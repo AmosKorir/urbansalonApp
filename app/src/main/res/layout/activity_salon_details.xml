@@ -17,11 +17,12 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/imageView4"
+      app:layout_constraintTop_toBottomOf="@+id/profile"
       tools:listitem="@layout/item_salon_service"
       />
   <ImageView
-      android:id="@+id/imageView3"
+      android:id="@+id/imageback"
+      android:foreground= "#A6333333"
       android:layout_width="0dp"
       android:layout_height="150dp"
       android:scaleType="centerCrop"
@@ -31,10 +32,12 @@
       tools:layout_editor_absoluteY="2dp"
       />
   <ImageView
-      android:id="@+id/imageView4"
+      android:id="@+id/profile"
       android:layout_width="100dp"
       android:layout_height="100dp"
       android:layout_marginTop="8dp"
+      android:background="@color/backgroundGrey"
+      android:padding="4dp"
       android:scaleType="fitCenter"
       app:layout_constraintBottom_toTopOf="@+id/textView4"
       app:layout_constraintTop_toTopOf="@+id/textView4"
@@ -62,8 +65,8 @@
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
       android:text="Currently"
-      app:layout_constraintStart_toEndOf="@+id/imageView4"
-      app:layout_constraintTop_toBottomOf="@+id/imageView3"
+      app:layout_constraintStart_toEndOf="@+id/profile"
+      app:layout_constraintTop_toBottomOf="@+id/imageback"
       />
   <TextView
       android:id="@+id/status"
@@ -76,24 +79,37 @@
       app:layout_constraintStart_toEndOf="@+id/textView4"
       app:layout_constraintTop_toTopOf="@+id/textView4"
       />
-  <RatingBar
-      android:id="@+id/ratingbar"
-      android:layout_width="wrap_content"
-      android:layout_height="0dp"
-      android:rating="4"
-      android:stepSize="1"
-      app:layout_constraintEnd_toStartOf="@+id/ratingCount"
-      app:layout_constraintTop_toBottomOf="@+id/status"
-      style="@style/Widget.AppCompat.RatingBar.Small"
-      />
   <TextView
-      android:id="@+id/ratingCount"
+      android:id="@+id/opening"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="24dp"
-      android:layout_marginRight="24dp"
-      android:text="234"
-      app:layout_constraintEnd_toEndOf="parent"
+      android:layout_marginLeft="28dp"
+      android:layout_marginStart="28dp"
+      android:layout_marginTop="12dp"
+      android:text="TextView"
+      app:layout_constraintStart_toEndOf="@+id/profile"
       app:layout_constraintTop_toBottomOf="@+id/status"
+      />
+  <TextView
+      android:id="@+id/textView24"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="18dp"
+      android:layout_marginStart="18dp"
+      android:layout_marginTop="10dp"
+      android:text="to"
+      app:layout_constraintStart_toEndOf="@+id/opening"
+      app:layout_constraintTop_toBottomOf="@+id/status"
+      />
+  <TextView
+      android:id="@+id/closing"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="15dp"
+      android:layout_marginStart="15dp"
+      android:layout_marginTop="37dp"
+      android:text="TextView"
+      app:layout_constraintStart_toEndOf="@+id/textView24"
+      app:layout_constraintTop_toBottomOf="@+id/imageback"
       />
 </android.support.constraint.ConstraintLayout>

@@ -7,10 +7,8 @@ import com.app.remote.data.models.SuccessApiResponse;
 import com.app.remote.data.models.customerorders.CustomerOrderResponse;
 import com.app.remote.domain.constants.Constants;
 import com.app.remote.domain.models.SalonModel;
-import com.app.remote.domain.models.Sucess;
 import io.reactivex.Single;
 import java.util.List;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -94,7 +92,14 @@ public interface SalonApi {
       @Field("opening") String opening,
       @Field("closing") String closing,
       @Field("status") String availability);
+
   @FormUrlEncoded
   @POST("upload/salon")
-  Single<SuccessApiResponse> uploadProfile(@Body MultipartBody requestBody, @Header(Constants.AUTHORIZATION)String accessToken);
+  Single<SuccessApiResponse> uploadProfile(@Body RequestBody requestBody,
+      @Header(Constants.AUTHORIZATION) String accessToken);
+
+  @FormUrlEncoded
+  @POST("service/status")
+  Single<SuccessApiResponse> updateService(@Header(Constants.AUTHORIZATION) String accessToken,
+      @Field("serviceid") String serviceid, @Field("status") String status);
 }

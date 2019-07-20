@@ -1,11 +1,12 @@
 package com.app.remote.data.repositories;
 
-import com.app.remote.data.api.SalonApi;
+
 import com.app.remote.data.mappers.AnalytiMapper;
 import com.app.remote.data.mappers.CustomerOrderMapper;
 import com.app.remote.data.mappers.SalonMapper;
 import com.app.remote.data.mappers.ServiceMapper;
 import com.app.remote.data.mappers.SuccessMapper;
+import com.app.remote.data.api.SalonApi;
 import com.app.remote.domain.models.AnalyticModel;
 import com.app.remote.domain.models.SalonModel;
 import com.app.remote.domain.models.Service;
@@ -25,8 +26,7 @@ import okhttp3.RequestBody;
  * amoskrr@gmail.com
  */
 public class SalonApiRepository implements SalonRepository {
-  SalonApi salonApi;
-
+    SalonApi salonApi;
   public SalonApiRepository(SalonApi salonApi) {
     this.salonApi = salonApi;
   }
@@ -137,5 +137,9 @@ public class SalonApiRepository implements SalonRepository {
     MultipartBody requestBody = builder.build();
     return salonApi.uploadProfile(requestBody,accessToken)
         .map(SuccessMapper::transform);
+  }
+
+  @Override public Single<Sucess> updatService(String accessToken, String serviceid,String status) {
+    return salonApi.updateService(accessToken,serviceid,status).map(SuccessMapper::transform);
   }
 }

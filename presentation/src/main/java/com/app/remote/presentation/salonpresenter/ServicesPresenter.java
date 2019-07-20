@@ -81,6 +81,15 @@ public class ServicesPresenter implements BasePresenter {
     compositeDisposable.add(disposable);
   }
 
+  public void updateService(String serviceid, String status) {
+    compositeDisposable = RxUtil.initDisposables(compositeDisposable);
+    Disposable disposable = salonApiRepository.updatService(getAccessToken(), serviceid, status)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(view::sucess, view::handleError);
+    compositeDisposable.add(disposable);
+  }
+
   public interface MyView extends View {
 
     void sucess(Service service);

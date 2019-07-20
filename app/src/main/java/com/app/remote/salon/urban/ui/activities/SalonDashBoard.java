@@ -128,7 +128,6 @@ public class SalonDashBoard extends BaseActivity
     super.onStart();
     startSalonSerVice();
     String accessToken = servicesPresenter.getAccessToken();
-    customToast(accessToken);
     if (accessToken == null) {
       startActivity(new Intent(this, RegisterSalonActivity.class));
     }

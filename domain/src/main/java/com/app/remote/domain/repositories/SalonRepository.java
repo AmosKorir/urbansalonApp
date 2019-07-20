@@ -51,4 +51,7 @@ public interface SalonRepository {
   Single<Sucess> updateSalon(String accessToken, String opening, String closing, String avilabity);
 
   Single<Sucess> uploadProfile(String accessToken, File imageFile);
+
+
+  Single<Sucess> updatService(String accessToken, String i,String status);
 }

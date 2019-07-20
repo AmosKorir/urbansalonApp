@@ -29,7 +29,7 @@
         >
 
       <ImageView
-          android:id="@+id/imageView2"
+          android:id="@+id/imageView"
           android:layout_width="0dp"
           android:layout_height="180dp"
           android:scaleType="centerCrop"
@@ -49,7 +49,7 @@
           android:textColor="@color/primaryTextColor"
           android:textSize="18sp"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/imageView2"
+          app:layout_constraintTop_toBottomOf="@+id/imageView"
           />
       <TextView
           android:id="@+id/textView3"
@@ -60,7 +60,7 @@
           android:layout_marginTop="8dp"
           android:text="Currently"
           app:layout_constraintEnd_toStartOf="@+id/status"
-          app:layout_constraintTop_toBottomOf="@+id/imageView2"
+          app:layout_constraintTop_toBottomOf="@+id/imageView"
           />
       <TextView
           android:id="@+id/status"
@@ -71,8 +71,8 @@
           android:layout_marginTop="8dp"
           android:text="Closed"
           android:textColor="@color/secondaryTextColor"
-          app:layout_constraintEnd_toEndOf="@+id/imageView2"
-          app:layout_constraintTop_toBottomOf="@+id/imageView2"
+          app:layout_constraintEnd_toEndOf="@+id/imageView"
+          app:layout_constraintTop_toBottomOf="@+id/imageView"
           />
     </android.support.constraint.ConstraintLayout>
   </android.support.v7.widget.CardView>

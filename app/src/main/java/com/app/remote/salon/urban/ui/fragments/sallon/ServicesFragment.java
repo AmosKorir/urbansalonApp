@@ -26,7 +26,8 @@ import javax.inject.Named;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ServicesFragment extends BaseFragment implements ServicesPresenter.MyView ,SalonServicesAdapter.SalonServiceAdapterInterface{
+public class ServicesFragment extends BaseFragment
+    implements ServicesPresenter.MyView, SalonServicesAdapter.SalonServiceAdapterInterface {
   private View view;
   @Inject @Named(DIConstants.ACTIVITY) Context context;
   @Inject ServicesPresenter servicesPresenter;
@@ -53,11 +54,11 @@ public class ServicesFragment extends BaseFragment implements ServicesPresenter.
   }
 
   @Override public void onStart() {
+    showProgress("Please wait..");
     super.onStart();
     servicesPresenter.setView(this);
     servicesPresenter.getAllServices();
     initRecyclers();
-
   }
 
   public void initRecyclers() {
@@ -69,15 +70,15 @@ public class ServicesFragment extends BaseFragment implements ServicesPresenter.
   }
 
   @Override public void services(List<Service> services) {
-    serviceRecyclerView.setAdapter(new SalonServicesAdapter(context,services,this));
-
+    dismissProgressDialog();
+    serviceRecyclerView.setAdapter(new SalonServicesAdapter(context, services, this));
   }
 
   @Override public void sucess(Sucess sucess) {
-
+    servicesPresenter.getAllServices();
   }
 
-  @Override public void setAvailability(String i) {
-
+  @Override public void setAvailability(String serviceId, String status) {
+    servicesPresenter.updateService(serviceId, status);
   }
 }
