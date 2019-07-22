@@ -102,4 +102,7 @@ public interface SalonApi {
   @POST("service/status")
   Single<SuccessApiResponse> updateService(@Header(Constants.AUTHORIZATION) String accessToken,
       @Field("serviceid") String serviceid, @Field("status") String status);
+
+  @GET("analytic/picount")
+  Single<List<ServiceAPiResponse>> getPiData(@Header(Constants.AUTHORIZATION) String accessToken);
 }

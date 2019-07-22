@@ -1,12 +1,11 @@
 package com.app.remote.data.repositories;
 
-
+import com.app.remote.data.api.SalonApi;
 import com.app.remote.data.mappers.AnalytiMapper;
 import com.app.remote.data.mappers.CustomerOrderMapper;
 import com.app.remote.data.mappers.SalonMapper;
 import com.app.remote.data.mappers.ServiceMapper;
 import com.app.remote.data.mappers.SuccessMapper;
-import com.app.remote.data.api.SalonApi;
 import com.app.remote.domain.models.AnalyticModel;
 import com.app.remote.domain.models.SalonModel;
 import com.app.remote.domain.models.Service;
@@ -26,7 +25,8 @@ import okhttp3.RequestBody;
  * amoskrr@gmail.com
  */
 public class SalonApiRepository implements SalonRepository {
-    SalonApi salonApi;
+  SalonApi salonApi;
+
   public SalonApiRepository(SalonApi salonApi) {
     this.salonApi = salonApi;
   }
@@ -125,7 +125,7 @@ public class SalonApiRepository implements SalonRepository {
 
   @Override public Single<Sucess> updateSalon(String accessToken, String opening, String closing,
       String avilabity) {
-    return salonApi.updateSalon(accessToken,opening,closing,avilabity)
+    return salonApi.updateSalon(accessToken, opening, closing, avilabity)
         .map(SuccessMapper::transform);
   }
 
@@ -135,11 +135,19 @@ public class SalonApiRepository implements SalonRepository {
     builder.addFormDataPart("file", imageFile.getName(),
         RequestBody.create(MediaType.parse("image/*"), imageFile));
     MultipartBody requestBody = builder.build();
-    return salonApi.uploadProfile(requestBody,accessToken)
+    return salonApi.uploadProfile(requestBody, accessToken)
         .map(SuccessMapper::transform);
   }
 
-  @Override public Single<Sucess> updatService(String accessToken, String serviceid,String status) {
-    return salonApi.updateService(accessToken,serviceid,status).map(SuccessMapper::transform);
+  @Override
+  public Single<Sucess> updatService(String accessToken, String serviceid, String status) {
+    return salonApi.updateService(accessToken, serviceid, status).map(SuccessMapper::transform);
+  }
+
+  @Override public Single<List<Service>> getPiData(String accessToken) {
+    return salonApi.getPiData(accessToken)
+        .flatMapPublisher(Flowable::fromIterable)
+        .map(ServiceMapper::transform)
+        .toList();
   }
 }
