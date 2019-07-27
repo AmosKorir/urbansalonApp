@@ -104,7 +104,7 @@ public class CustomerOrderRecyclerAdapter
       @Override public boolean onMenuItemClick(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.cancel_action) {
-        customerOrderAdapterInterface.cancelOrder(customerOrder);
+        customerOrderAdapterInterface.cancelOrder(customerOrder,"2");
         }
         return false;
       }
@@ -133,6 +133,6 @@ public class CustomerOrderRecyclerAdapter
   }
 
   public interface customerOrderAdapterInterface {
-    void cancelOrder(CustomerOrder customerOrder);
+    void cancelOrder(CustomerOrder customerOrder, String status);
   }
 }

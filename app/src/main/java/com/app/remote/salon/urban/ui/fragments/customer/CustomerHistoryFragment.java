@@ -12,6 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.app.remote.domain.constants.DIConstants;
 import com.app.remote.domain.models.OrderModel;
+import com.app.remote.domain.models.Sucess;
 import com.app.remote.domain.models.customerOrders.CustomerOrder;
 import com.app.remote.presentation.customerpresenters.CustomerOrderPresenter;
 import com.app.remote.presentation.customerpresenters.CustomerPresenter;
@@ -76,13 +77,17 @@ public class CustomerHistoryFragment extends BaseFragment implements CustomerPre
     recyclerView.setAdapter(customerOrderRecyclerAdapter);
   }
 
-  @Override public void cancelOrder(CustomerOrder customerOrder) {
-    customerOrderPresenter.cancelOrder(customerOrder.getOrderid().toString());
-  }
+
 
   @Override public void cancelOrder(OrderModel orderModel) {
    customToast("Cancellation Successful");
   }
 
+  @Override public void orderStatus(Sucess sucess) {
 
+  }
+
+  @Override public void cancelOrder(CustomerOrder customerOrder, String status) {
+
+  }
 }

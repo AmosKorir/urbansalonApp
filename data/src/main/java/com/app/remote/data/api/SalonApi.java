@@ -52,7 +52,7 @@ public interface SalonApi {
   Single<SuccessApiResponse> setOrderStatus(@Header(Constants.AUTHORIZATION) String accessToken,
       @Field("orderid") Integer orderid, @Field("status") int i);
 
-  @GET("service/all")
+  @GET("service/recommendation")
   Single<List<ServiceAPiResponse>> getRecommended(
       @Header(Constants.AUTHORIZATION) String accessToken);
 

@@ -118,4 +118,8 @@ public class AddSearvicActivity extends BaseActivity implements ServicesPresente
     nameEd.setText(Constants.EMPTY_STRING);
     priceEd.setText(Constants.EMPTY_STRING);
   }
+
+  @Override public void recommended(List<Service> services) {
+
+  }
 }

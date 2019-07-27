@@ -78,6 +78,10 @@ public class ServicesFragment extends BaseFragment
     servicesPresenter.getAllServices();
   }
 
+  @Override public void recommended(List<Service> services) {
+
+  }
+
   @Override public void setAvailability(String serviceId, String status) {
     servicesPresenter.updateService(serviceId, status);
   }

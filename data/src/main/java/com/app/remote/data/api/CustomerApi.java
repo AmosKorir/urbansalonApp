@@ -2,6 +2,7 @@ package com.app.remote.data.api;
 
 import com.app.remote.data.models.CustomerApiResponse;
 import com.app.remote.data.models.OrderModelResponse;
+import com.app.remote.data.models.SuccessApiResponse;
 import com.app.remote.data.models.customerorders.CustomerOrderResponse;
 import com.app.remote.domain.constants.Constants;
 import io.reactivex.Single;
@@ -48,8 +49,16 @@ public interface CustomerApi {
   @GET("order/customer/closed")
   Single<List<CustomerOrderResponse>> getCustomerOrdersClose(
       @Header(Constants.AUTHORIZATION) String accessToken);
-@FormUrlEncoded
+
+  @FormUrlEncoded
   @POST("order/status")
   Single<OrderModelResponse> cancelOrder(@Header(Constants.AUTHORIZATION) String accessToken,
       @Field("orderid") String orderId);
+
+
+
+  @FormUrlEncoded
+  @POST("order/status")
+  Single<SuccessApiResponse> changeOrderStatus(@Header(Constants.AUTHORIZATION) String accessToken,
+      @Field("orderid") Integer orderId, @Field("status") int status);
 }

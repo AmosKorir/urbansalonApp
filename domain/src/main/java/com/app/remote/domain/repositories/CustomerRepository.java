@@ -4,8 +4,6 @@ import com.app.remote.domain.models.CustomerModel;
 import com.app.remote.domain.models.OrderModel;
 import com.app.remote.domain.models.Sucess;
 import com.app.remote.domain.models.customerOrders.CustomerOrder;
-import com.sun.net.httpserver.Authenticator;
-import io.reactivex.Completable;
 import io.reactivex.Single;
 import java.util.List;
 
@@ -27,4 +25,6 @@ public interface CustomerRepository {
   Single<OrderModel> cancelOrder(String accessToken, String orderId);
 
   Single<List<CustomerOrder>> getHistory(String accessToken);
+
+  Single<Sucess> setOrderStatus(String acceessToken, Integer orderId,String status);
 }

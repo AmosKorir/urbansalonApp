@@ -4,8 +4,10 @@ import com.app.remote.data.api.CustomerApi;
 import com.app.remote.data.mappers.CustomerMapper;
 import com.app.remote.data.mappers.CustomerOrderMapper;
 import com.app.remote.data.mappers.OrderMapper;
+import com.app.remote.data.mappers.SuccessMapper;
 import com.app.remote.domain.models.CustomerModel;
 import com.app.remote.domain.models.OrderModel;
+import com.app.remote.domain.models.Sucess;
 import com.app.remote.domain.models.customerOrders.CustomerOrder;
 import com.app.remote.domain.repositories.CustomerRepository;
 import io.reactivex.Flowable;
@@ -60,5 +62,11 @@ public class CustomerApiRepository implements CustomerRepository {
         .flatMapPublisher(Flowable::fromIterable)
         .map(CustomerOrderMapper::transform)
         .toList();
+  }
+
+  @Override
+  public Single<Sucess> setOrderStatus(String acceessToken, Integer orderId, String status) {
+    return customerApi.changeOrderStatus(acceessToken, orderId, Integer.parseInt(status)).map(
+        SuccessMapper::transform);
   }
 }

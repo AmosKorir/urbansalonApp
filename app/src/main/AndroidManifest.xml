@@ -12,6 +12,15 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
+    <activity
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+        android:name=".ui.activities.IntroActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
     <activity android:name=".ui.activities.SalonLogin">
     </activity>
     <activity
@@ -36,8 +45,8 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
     </activity>
     <activity
-        android:theme="@style/AppTheme.NoActionBar"
-        android:name=".ui.activities.SalonDetailsActivity">
+        android:name=".ui.activities.SalonDetailsActivity"
+        android:theme="@style/AppTheme.NoActionBar">
     </activity>
     <activity
         android:name=".ui.activities.MainDashBoadActivity"
@@ -47,11 +56,7 @@
     <activity
         android:name=".ui.activities.Splash"
         android:theme="@style/AppTheme.NoActionBar">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
 
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
     </activity>
   </application>
 

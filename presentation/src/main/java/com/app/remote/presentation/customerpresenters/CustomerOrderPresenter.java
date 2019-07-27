@@ -6,6 +6,8 @@ import com.app.remote.data.utils.RxUtil;
 import com.app.remote.domain.constants.Constants;
 import com.app.remote.domain.constants.DIConstants;
 import com.app.remote.domain.models.OrderModel;
+import com.app.remote.domain.models.Sucess;
+import com.app.remote.domain.models.customerOrders.CustomerOrder;
 import com.app.remote.domain.repositories.CustomerRepository;
 import com.app.remote.presentation.BasePresenter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -51,8 +53,19 @@ public class CustomerOrderPresenter implements BasePresenter {
     compositeDisposable.add(compositeDisposable);
   }
 
+  public void setOrder(CustomerOrder customerOrder,String status) {
+     compositeDisposable= RxUtil.initDisposables(compositeDisposable);
+         Disposable disposable= customerApiRepository.setOrderStatus(getAccessToken(),customerOrder.getOrderid(),status)
+             .subscribeOn(Schedulers.io())
+             .observeOn(AndroidSchedulers.mainThread())
+             .subscribe(view::orderStatus,view::handleError);
+             compositeDisposable.add(disposable);
+  }
+
   public interface MyView extends BasePresenter.View {
 
     void cancelOrder(OrderModel orderModel);
+
+    void orderStatus(Sucess sucess);
   }
 }

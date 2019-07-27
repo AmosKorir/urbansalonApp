@@ -44,9 +44,7 @@ public class ServicesPresenter implements BasePresenter {
     Disposable disposable = salonApiRepository.createService(getAccessToken(), name, price)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(s -> {
-          uploadServiceImage(file, s.getServiceid());
-        }, view::handleError);
+        .subscribe(s -> uploadServiceImage(file, s.getServiceid()), view::handleError);
     compositeDisposable.add(disposable);
   }
 
@@ -77,7 +75,7 @@ public class ServicesPresenter implements BasePresenter {
     Disposable disposable = salonApiRepository.getRecommended(getAccessToken())
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(view::services, view::handleError);
+        .subscribe(view::recommended, view::handleError);
     compositeDisposable.add(disposable);
   }
 
@@ -97,5 +95,7 @@ public class ServicesPresenter implements BasePresenter {
     void services(List<Service> services);
 
     void sucess(Sucess sucess);
+
+    void recommended(List<Service> services);
   }
 }

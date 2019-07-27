@@ -55,6 +55,7 @@ public class HomeFragment extends BaseFragment
     servicesPresenter.setView(this);
     initRecyclers();
     servicesPresenter.getRecommendation();
+    servicesPresenter.getAllServices();
   }
 
   private void initRecyclers() {
@@ -67,16 +68,21 @@ public class HomeFragment extends BaseFragment
 
   @Override public void services(List<Service> services) {
     serviceRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-    recommendedRecyclerView.setLayoutManager(
-        new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+
     serviceRecyclerView.setAdapter(new ServicesRecyclerViewAdapter(context, services, this,
         R.layout.item_salon_service));
-    recommendedRecyclerView.setAdapter(
-        new ServicesRecyclerViewAdapter(context, services, this, R.layout.item_recommended_layout));
+
   }
 
   @Override public void sucess(Sucess sucess) {
 
+  }
+
+  @Override public void recommended(List<Service> services) {
+    recommendedRecyclerView.setAdapter(
+        new ServicesRecyclerViewAdapter(context, services, this, R.layout.item_recommended_layout));
+    recommendedRecyclerView.setLayoutManager(
+        new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
   }
 
   @Override public void serviceId(String serviceid) {
