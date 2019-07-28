@@ -21,7 +21,9 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name=".ui.activities.SalonLogin">
+    <activity
+        android:theme="@style/AppTheme.NoActionBar"
+        android:name=".ui.activities.SalonLogin">
     </activity>
     <activity
         android:name=".ui.activities.AddSearvicActivity"

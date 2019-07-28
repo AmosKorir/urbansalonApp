@@ -70,6 +70,15 @@ public class ServicesPresenter implements BasePresenter {
     compositeDisposable.add(disposable);
   }
 
+  public void getUnAuthServices() {
+    compositeDisposable = RxUtil.initDisposables(compositeDisposable);
+    Disposable disposable = salonApiRepository.getAnUthServices()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(view::services, view::handleError);
+    compositeDisposable.add(disposable);
+  }
+
   public void getRecommendation() {
     compositeDisposable = RxUtil.initDisposables(compositeDisposable);
     Disposable disposable = salonApiRepository.getRecommended(getAccessToken())

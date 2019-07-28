@@ -94,6 +94,10 @@ public class MainDashBoadActivity extends BaseActivity
 
     } else if (id == R.id.Bookedservice) {
       startOrders();
+    } else if (id == R.id.swichAccount) {
+      switchAccount(2);
+    } else if (id == R.id.nav_logout) {
+      logout();
     }
 
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -149,46 +153,35 @@ public class MainDashBoadActivity extends BaseActivity
   }
 
   private void startProfile() {
-    CustomerProfileFragment customerProfileFragment=new CustomerProfileFragment();
+    CustomerProfileFragment customerProfileFragment = new CustomerProfileFragment();
     customerProfileFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Dialog_FullScreen);
-    customerProfileFragment.show(fragmentManager,"profile");
+    customerProfileFragment.show(fragmentManager, "profile");
   }
-  private void  startSalons(){
+
+  private void startSalons() {
     FragmentTransaction fragmentTransaction = initFragments();
     fragmentTransaction.replace(R.id.fragment_container, new SalonsFragments());
     fragmentTransaction.commit();
   }
-
 
   public void initRecyclerView() {
 
   }
 
   //top layout navigation
-  @OnClick(R.id.bookinga) public void bookinga() {
+  @OnClick(R.id.bookings) public void bookinga() {
     startOrders();
   }
 
-  @OnClick(R.id.bookinga) public void bookingw() {
-    startOrders();
-  }
-
-  @OnClick(R.id.servicesa) public void servicea() {
+  @OnClick(R.id.services) public void servicea() {
     startHomeFragment();
   }
 
-  @OnClick(R.id.servicesw) public void servicew() {
-    startHomeFragment();
-  }
-
-  @OnClick(R.id.salonsa) public void salonsa() {
+  @OnClick(R.id.salons) public void salonsw() {
     startSalons();
   }
 
-  @OnClick(R.id.salonsw) public void salonsw() {
-
-  }
-  @OnClick(R.id.drawerIcon) public void toggleDrawer(){
+  @OnClick(R.id.drawerIcon) public void toggleDrawer() {
     drawer.openDrawer(Gravity.LEFT);
   }
 }

@@ -150,4 +150,11 @@ public class SalonApiRepository implements SalonRepository {
         .map(ServiceMapper::transform)
         .toList();
   }
+
+  @Override public Single<List<Service>> getAnUthServices() {
+    return salonApi.getAnUthServices()
+        .flatMapPublisher(Flowable::fromIterable)
+        .map(ServiceMapper::transform)
+        .toList();
+  }
 }

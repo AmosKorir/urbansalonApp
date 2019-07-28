@@ -55,7 +55,7 @@ public class HomeFragment extends BaseFragment
     servicesPresenter.setView(this);
     initRecyclers();
     servicesPresenter.getRecommendation();
-    servicesPresenter.getAllServices();
+    servicesPresenter.getUnAuthServices();
   }
 
   private void initRecyclers() {

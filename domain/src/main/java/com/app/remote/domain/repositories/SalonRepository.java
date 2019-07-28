@@ -56,4 +56,6 @@ public interface SalonRepository {
   Single<Sucess> updatService(String accessToken, String i,String status);
 
   Single<List<Service>> getPiData(String accessToken);
+
+  Single<List<Service>> getAnUthServices();
 }

@@ -17,7 +17,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import com.app.remote.presentation.salonpresenter.SalonProfilePresenter;
 import com.app.remote.presentation.salonpresenter.ServicesPresenter;
 import com.app.remote.salon.urban.R;
 import com.app.remote.salon.urban.ui.fragments.sallon.AnalyticFragment;
@@ -36,7 +35,9 @@ public class SalonDashBoard extends BaseActivity
   @Inject FragmentManager fragmentManager;
   @Inject ServicesPresenter servicesPresenter;
   private SalonProfile salonProfile;
+  String accessToken = null;
   private File imageFile;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -106,17 +107,26 @@ public class SalonDashBoard extends BaseActivity
     // Handle navigation view item clicks here.
     int id = item.getItemId();
     if (id == R.id.Orders) {
-      startActiveOrders();
+      if (accessToken != null) {
+        startActiveOrders();
+      }
     } else if (id == R.id.services) {
-      startSalonSerVice();
+      if (accessToken != null) {
+        startSalonSerVice();
+      }
     } else if (id == R.id.profile) {
-      startSalonProfile();
+      if (accessToken != null) {
+        startSalonProfile();
+      }
+
     } else if (id == R.id.nav_share) {
 
     } else if (id == R.id.nav_send) {
 
     } else if (id == R.id.analytics) {
-      startAnalytic();
+      if (accessToken != null) {
+        startAnalytic();
+      }
     }
 
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -126,12 +136,19 @@ public class SalonDashBoard extends BaseActivity
 
   @Override protected void onStart() {
     super.onStart();
-    startSalonSerVice();
-    String accessToken = servicesPresenter.getAccessToken();
+
+    accessToken = servicesPresenter.getAccessToken();
     if (accessToken == null) {
-      startActivity(new Intent(this, RegisterSalonActivity.class));
+      toRegister();
     }
-    salonProfile = new SalonProfile();
+    if (accessToken != null) {
+      startActiveOrders();
+      salonProfile = new SalonProfile();
+    }
+  }
+
+  private void toRegister() {
+    startActivity(new Intent(this, RegisterSalonActivity.class));
   }
 
   //init fragment management
@@ -172,6 +189,7 @@ public class SalonDashBoard extends BaseActivity
     intent.setType("image/*");
     startActivityForResult(intent, IMAGE_CODE);
   }
+
   @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (data != null) {
@@ -179,7 +197,7 @@ public class SalonDashBoard extends BaseActivity
         Uri imageUri = data.getData();
         Bitmap thumbnail =
             MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-       salonProfile.setImageBitmap(thumbnail);
+        salonProfile.setImageBitmap(thumbnail);
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         File destination = new File(getCacheDir(), "temp.jpg");

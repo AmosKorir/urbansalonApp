@@ -67,7 +67,6 @@ public class SalonRegisterPresenter implements BasePresenter {
           view.success(s);
         }, view::handleError);
     compositeDisposable.add(disposable);
-    compositeDisposable.add(disposable);
   }
 
   public interface MyView extends View {

@@ -3,6 +3,7 @@ package com.app.remote.salon.urban.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.OnClick;
 import com.app.remote.domain.models.SalonModel;
@@ -46,5 +47,10 @@ public class SalonLogin extends BaseActivity implements SalonRegisterPresenter.M
 
   @Override public void success(SalonModel salonModel) {
     finish();
+  }
+
+  public void handleError(Throwable throwable) {
+    dismissProgressDialog();
+    customToast("please check your credentials");
   }
 }

@@ -8,89 +8,10 @@
     android:background="@color/backgroundGrey"
     >
 
-  <ImageView
-      android:id="@+id/salonsa"
-      android:layout_width="19dp"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="8dp"
-      android:layout_marginLeft="8dp"
-      android:layout_marginRight="8dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="42dp"
-      app:layout_constraintEnd_toStartOf="@+id/servicesa"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/ic_graphic_eq_black_24dp"
-      />
-  <ImageView
-      android:id="@+id/servicesa"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="8dp"
-      android:layout_marginLeft="8dp"
-      android:layout_marginRight="8dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="9dp"
-      app:layout_constraintEnd_toStartOf="@+id/bookinga"
-      app:layout_constraintStart_toEndOf="@+id/salonsa"
-      app:layout_constraintTop_toBottomOf="@+id/textView10"
-      app:srcCompat="@drawable/ic_graphic_eq_black_24dp"
-      />
-  <ImageView
-      android:id="@+id/bookinga"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="8dp"
-      android:layout_marginLeft="8dp"
-      android:layout_marginRight="8dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginTop="42dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@+id/servicesa"
-      app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/ic_home_black_24dp"
-      />
-  <TextView
-      android:id="@+id/salonsw"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="8dp"
-      android:layout_marginTop="12dp"
-      android:text="Salons"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="@+id/salonsa"
-      app:layout_constraintStart_toStartOf="@+id/salonsa"
-      app:layout_constraintTop_toBottomOf="@+id/salonsa"
-      />
-  <TextView
-      android:id="@+id/servicesw"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="8dp"
-      android:layout_marginTop="12dp"
-      android:text="services"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="@+id/servicesa"
-      app:layout_constraintStart_toStartOf="@+id/servicesa"
-      app:layout_constraintTop_toBottomOf="@+id/servicesa"
-      />
-  <TextView
-      android:id="@+id/bookingw"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="8dp"
-      android:layout_marginTop="12dp"
-      android:text="Booking"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="@+id/bookinga"
-      app:layout_constraintStart_toStartOf="@+id/bookinga"
-      app:layout_constraintTop_toBottomOf="@+id/bookinga"
-      />
   <TextView
       android:id="@+id/textView10"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="16dp"
       android:layout_marginEnd="8dp"
       android:layout_marginLeft="8dp"
       android:layout_marginRight="8dp"
@@ -101,7 +22,6 @@
       android:textSize="18sp"
       android:textStyle="bold"
       android:typeface="serif"
-      app:layout_constraintBottom_toTopOf="@+id/servicesa"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -110,13 +30,95 @@
       android:id="@+id/drawerIcon"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="8dp"
       android:layout_marginLeft="5dp"
       android:layout_marginStart="5dp"
-      android:layout_marginTop="3dp"
-      app:layout_constraintBottom_toTopOf="@+id/salonsa"
+      android:layout_marginTop="6dp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/options"
       />
+  <LinearLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="16dp"
+      android:orientation="horizontal"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.4"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView10"
+      >
+    <LinearLayout
+        android:id="@+id/salons"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+      <ImageView
+          android:id="@+id/salonsa2"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:srcCompat="@drawable/ic_beach_access_black_24dp"
+          tools:layout_editor_absoluteX="82dp"
+          tools:layout_editor_absoluteY="42dp"
+          />
+      <TextView
+          android:id="@+id/salonsw2"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:text="Salons"
+          tools:layout_editor_absoluteX="71dp"
+          tools:layout_editor_absoluteY="82dp"
+          />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/services"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+      <ImageView
+          android:id="@+id/servicesa"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:srcCompat="@drawable/ic_filter_center_focus_black_24dp"
+          />
+      <TextView
+          android:id="@+id/servicesw"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:text="services"
+          />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/bookings"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+      <ImageView
+          android:id="@+id/bookinga"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:srcCompat="@drawable/ic_adjust_black_24dp"
+          />
+      <TextView
+          android:id="@+id/bookingw"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:text="Booking"
+          />
+    </LinearLayout>
+  </LinearLayout>
 </android.support.constraint.ConstraintLayout>

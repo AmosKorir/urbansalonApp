@@ -67,6 +67,7 @@ public class CustomerPresenter implements BasePresenter {
   }
   public String getAccessToken() {
     return sharedPreferences.getString(Constants.ACCESS_TOKEN, null);
+
   }
 
   public void bookService(String serviceId, String date, String time) {

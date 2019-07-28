@@ -7,6 +7,7 @@ import com.app.remote.data.models.SuccessApiResponse;
 import com.app.remote.data.models.customerorders.CustomerOrderResponse;
 import com.app.remote.domain.constants.Constants;
 import com.app.remote.domain.models.SalonModel;
+import com.app.remote.domain.models.Service;
 import io.reactivex.Single;
 import java.util.List;
 import okhttp3.RequestBody;
@@ -105,4 +106,6 @@ public interface SalonApi {
 
   @GET("analytic/picount")
   Single<List<ServiceAPiResponse>> getPiData(@Header(Constants.AUTHORIZATION) String accessToken);
+    @GET("service/all")
+  Single<List<ServiceAPiResponse>> getAnUthServices();
 }

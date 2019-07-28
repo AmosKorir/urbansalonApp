@@ -67,4 +67,10 @@ public class RegisterSalonActivity extends BaseActivity implements SalonRegister
     customToast("Successful");
     finish();
   }
+
+  @Override public void onBackPressed() {
+    super.onBackPressed();
+    startActivity(new Intent(this,MainDashBoadActivity.class));
+    finish();
+  }
 }
