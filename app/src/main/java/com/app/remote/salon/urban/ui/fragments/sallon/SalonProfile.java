@@ -143,7 +143,7 @@ public class SalonProfile extends BaseDialogFragment implements SalonProfilePres
 
   public void upload(File imageFile) {
     showProgress("Setting profile");
-    customToast("upl");
+    customToast("uploaded");
     salonProfilePresenter.uploadProfile(imageFile);
   }
 

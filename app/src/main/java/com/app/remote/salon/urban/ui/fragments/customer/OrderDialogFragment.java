@@ -74,7 +74,7 @@ public class OrderDialogFragment extends BaseBottomSheetFragment implements Cust
       Bundle savedInstanceState) {
     calendar = Calendar.getInstance();
     year = calendar.get(Calendar.YEAR);
-    month = calendar.get(Calendar.MONTH);
+    month = calendar.get(Calendar.MONTH)+1;
     day = calendar.get(Calendar.DAY_OF_MONTH);
     hour = calendar.getTime().getHours();
     minutes = calendar.getTime().getMinutes();

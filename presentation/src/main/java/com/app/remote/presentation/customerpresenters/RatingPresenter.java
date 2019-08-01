@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import com.app.remote.data.utils.RxUtil;
 import com.app.remote.domain.constants.Constants;
 import com.app.remote.domain.constants.DIConstants;
-import com.app.remote.domain.models.CustomerModel;
 import com.app.remote.domain.models.Sucess;
 import com.app.remote.domain.repositories.CustomerRepository;
 import com.app.remote.presentation.BasePresenter;
@@ -13,59 +12,52 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import java.io.File;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- * Created by Korir on 6/7/19.
+ * Created by Korir on 8/1/19.
  * amoskrr@gmail.com
  */
-public class CustomerProfilePresenter implements BasePresenter {
+public class RatingPresenter implements BasePresenter {
   private CompositeDisposable compositeDisposable;
-  @Inject @Named(DIConstants.API) CustomerRepository customerRepository;
-  @Inject SharedPreferences sharedPreferences;
+  @Inject @Named(DIConstants.API) CustomerRepository customerApiRepository;
+
+  @Inject
+  public RatingPresenter() {
+  }
+
+
+
+
   private MyView view;
+  @Inject SharedPreferences sharedPreferences;
 
   public String getAccessToken() {
     return sharedPreferences.getString(Constants.ACCESS_TOKEN, null);
-  }
-
-  @Inject
-  public CustomerProfilePresenter() {
-
-  }
-
-  public void getProfile() {
-    compositeDisposable = RxUtil.initDisposables(compositeDisposable);
-    Disposable disposable = customerRepository.getProfile(getAccessToken())
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(view::setProfile, view::handleError);
-    compositeDisposable.add(disposable);
   }
 
   public void setView(MyView view) {
     this.view = view;
   }
 
+  public void rateService(String serviceId, String rating) {
+    compositeDisposable = RxUtil.initDisposables(compositeDisposable);
+    Disposable disposable = customerApiRepository.rate(getAccessToken(),serviceId,rating)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(view::success,view::handleError);
+
+    compositeDisposable.add(disposable);
+  }
+
   @Override public void dispose() {
     compositeDisposable.add(compositeDisposable);
   }
 
-  public void upload(File destination) {
-     compositeDisposable= RxUtil.initDisposables(compositeDisposable);
-         Disposable disposable= customerRepository.uploadProfile(destination,getAccessToken())
-             .subscribeOn(Schedulers.io())
-             .observeOn(AndroidSchedulers.mainThread())
-             .subscribe(view::uploadSuccess,view::handleError);
-             compositeDisposable.add(disposable);
-  }
-
   public interface MyView extends View {
 
-    void setProfile(CustomerModel customerModel);
 
-    void uploadSuccess(Sucess sucess);
+    void success(Sucess sucess);
   }
 }

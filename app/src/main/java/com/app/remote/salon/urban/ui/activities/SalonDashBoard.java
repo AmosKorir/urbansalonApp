@@ -127,6 +127,10 @@ public class SalonDashBoard extends BaseActivity
       if (accessToken != null) {
         startAnalytic();
       }
+    }else if (id == R.id.swichAccount) {
+      switchAccount(1);
+    } else if (id == R.id.nav_logout) {
+      logout();
     }
 
     DrawerLayout drawer = findViewById(R.id.drawer_layout);

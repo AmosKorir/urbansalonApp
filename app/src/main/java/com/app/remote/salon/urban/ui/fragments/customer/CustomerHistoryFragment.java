@@ -3,6 +3,7 @@ package com.app.remote.salon.urban.ui.fragments.customer;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ public class CustomerHistoryFragment extends BaseFragment implements CustomerPre
   @Inject CustomerOrderPresenter customerOrderPresenter;
   @Inject @Named(DIConstants.ACTIVITY) Context context;
   @BindView(R.id.customerRecyclerView) RecyclerView recyclerView;
+  @Inject FragmentManager fragmentManager;
   private CustomerOrderRecyclerAdapter customerOrderRecyclerAdapter;
 
   public CustomerHistoryFragment() {
@@ -89,5 +91,14 @@ public class CustomerHistoryFragment extends BaseFragment implements CustomerPre
 
   @Override public void cancelOrder(CustomerOrder customerOrder, String status) {
 
+  }
+
+  @Override public void rateService(String serviceId) {
+      showRatingDialog(serviceId);
+  }
+
+  private void showRatingDialog(String serviceId){
+    Rating_fragment rating_fragment=Rating_fragment.newInstance(serviceId);
+    rating_fragment.show(fragmentManager,"rating");
   }
 }

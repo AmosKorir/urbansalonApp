@@ -15,8 +15,8 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="Recommended Services"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="14sp"
         />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recomended"
@@ -29,8 +29,8 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="Available Services"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="14sp"
         />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/serviceList"

@@ -1,10 +1,11 @@
 package com.app.remote.salon.urban.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,21 +13,34 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import butterknife.OnClick;
+import com.app.remote.domain.models.CustomerModel;
+import com.app.remote.domain.models.Sucess;
+import com.app.remote.presentation.customerpresenters.CustomerProfilePresenter;
 import com.app.remote.salon.urban.R;
 import com.app.remote.salon.urban.ui.fragments.HomeFragment;
 import com.app.remote.salon.urban.ui.fragments.customer.CustomerHistoryFragment;
 import com.app.remote.salon.urban.ui.fragments.customer.CustomerOrderFragment;
 import com.app.remote.salon.urban.ui.fragments.customer.CustomerProfileFragment;
 import com.app.remote.salon.urban.ui.fragments.customer.SalonsFragments;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import javax.inject.Inject;
 
 public class MainDashBoadActivity extends BaseActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+    implements NavigationView.OnNavigationItemSelectedListener,
+
+    CustomerProfileFragment.ProfileInterface {
+  private static final int IMAGE_CODE = 567;
+  CustomerProfileFragment customerProfileFragment=new CustomerProfileFragment();
   @Inject FragmentManager fragmentManager;
+  private File imageFile;
   DrawerLayout drawer;
 
   @Override
@@ -37,10 +51,7 @@ public class MainDashBoadActivity extends BaseActivity
     Toolbar toolbar = findViewById(R.id.toolbar);
     setTitle("Urban Salon");
     setSupportActionBar(toolbar);
-    FloatingActionButton fab = findViewById(R.id.fab);
-    fab.setOnClickListener(
-        view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show());
+
     drawer = findViewById(R.id.drawer_layout);
     NavigationView navigationView = findViewById(R.id.nav_view);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -69,15 +80,8 @@ public class MainDashBoadActivity extends BaseActivity
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-    // as you specify a parent activity in AndroidManifest.xml.
-    int id = item.getItemId();
 
-    //noinspection SimplifiableIfStatement
-    //if (id == R.id.action_settings) {
-    //  return true;
-    //}
+    int id = item.getItemId();
 
     return super.onOptionsItemSelected(item);
   }
@@ -122,18 +126,6 @@ public class MainDashBoadActivity extends BaseActivity
     return fragmentTransaction;
   }
 
-  //run the account Fragment
-  //private void startCreateFragment() {
-  //  FragmentTransaction fragmentTransaction = initFragments();
-  //  fragmentTransaction.replace(R.id.fragment_container, new CreateServiceFragment());
-  //  fragmentTransaction.commit();
-  //  customToast("dfsgjkk");
-  //}
-  @OnClick(R.id.fab) public void switchAccount() {
-    startActivity(new Intent(this, SalonDashBoard.class));
-    finish();
-  }
-
   private void startHomeFragment() {
     FragmentTransaction fragmentTransaction = initFragments();
     fragmentTransaction.replace(R.id.fragment_container, new HomeFragment());
@@ -153,8 +145,8 @@ public class MainDashBoadActivity extends BaseActivity
   }
 
   private void startProfile() {
-    CustomerProfileFragment customerProfileFragment = new CustomerProfileFragment();
-    customerProfileFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.Dialog_FullScreen);
+    customerProfileFragment=new CustomerProfileFragment();
+    customerProfileFragment.setProfileInterface(this);
     customerProfileFragment.show(fragmentManager, "profile");
   }
 
@@ -184,4 +176,46 @@ public class MainDashBoadActivity extends BaseActivity
   @OnClick(R.id.drawerIcon) public void toggleDrawer() {
     drawer.openDrawer(Gravity.LEFT);
   }
+
+  @Override public void getProfileImage() {
+    Intent intent = new Intent(Intent.ACTION_PICK);
+    intent.setType("image/*");
+    startActivityForResult(intent, IMAGE_CODE);
+  }
+
+  @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    if (data != null) {
+      try {
+        Uri imageUri = data.getData();
+        Bitmap thumbnail =
+            MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        File destination = new File(getCacheDir(), "temp.jpg");
+        FileOutputStream fo;
+        try {
+          fo = new FileOutputStream(destination);
+          fo.write(bytes.toByteArray());
+          fo.close();
+          imageFile = destination;
+          customerProfileFragment.upload(imageFile);
+
+        } catch (IOException e) {
+          customToast("Failed to get the image");
+          e.printStackTrace();
+        }
+      } catch (Exception e) {
+        Log.d("MMMM",e.getMessage());
+      }
+    } else {
+      customToast("Failed to get the image");
+    }
+  }
+
+
 }
+
+

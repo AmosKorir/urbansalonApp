@@ -5,6 +5,7 @@ import com.app.remote.domain.models.OrderModel;
 import com.app.remote.domain.models.Sucess;
 import com.app.remote.domain.models.customerOrders.CustomerOrder;
 import io.reactivex.Single;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -27,4 +28,9 @@ public interface CustomerRepository {
   Single<List<CustomerOrder>> getHistory(String accessToken);
 
   Single<Sucess> setOrderStatus(String acceessToken, Integer orderId,String status);
+
+
+  Single<Sucess> uploadProfile(File destination, String accessToken);
+
+  Single<Sucess> rate(String accessToken, String serviceId, String rating);
 }

@@ -8,6 +8,7 @@ import com.app.remote.salon.urban.ui.fragments.customer.CustomerHistoryFragment;
 import com.app.remote.salon.urban.ui.fragments.customer.CustomerOrderFragment;
 import com.app.remote.salon.urban.ui.fragments.customer.CustomerProfileFragment;
 import com.app.remote.salon.urban.ui.fragments.customer.OrderDialogFragment;
+import com.app.remote.salon.urban.ui.fragments.customer.Rating_fragment;
 import com.app.remote.salon.urban.ui.fragments.customer.SalonsFragments;
 import com.app.remote.salon.urban.ui.fragments.sallon.AnalyticFragment;
 import com.app.remote.salon.urban.ui.fragments.sallon.OrderSFragment;
@@ -46,6 +47,8 @@ import dagger.Subcomponent;
   void inject(SalonsFragments salonsFragments);
 
   void inject(SalonProfile salonProfile);
+
+  void inject(Rating_fragment rating_fragment);
 
   @Subcomponent.Builder interface Builder {
     Builder fragmentModule(FragmentModule fragmentModule);

@@ -32,6 +32,15 @@
           android:id="@+id/nav_send"
           android:icon="@drawable/ic_menu_send"
           android:title="@string/menu_send"/>
+      <item
+          android:id="@+id/nav_logout"
+          android:icon="@drawable/ic_exit_to_app_black_24dp"
+          android:title="@string/logout"/>
+
+      <item
+          android:id="@+id/swichAccount"
+          android:icon="@drawable/ic_account_circle_black_24dp"
+          android:title="@string/switch_to_salon"/>
     </menu>
   </item>
 

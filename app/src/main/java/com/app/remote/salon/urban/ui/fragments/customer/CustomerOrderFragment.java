@@ -92,4 +92,8 @@ public class CustomerOrderFragment extends BaseFragment implements CustomerPrese
   @Override public void cancelOrder(CustomerOrder customerOrder, String status) {
     customerOrderPresenter.setOrder(customerOrder,status);
   }
+
+  @Override public void rateService(String serviceId) {
+
+  }
 }

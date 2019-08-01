@@ -5,24 +5,18 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.app.remote.data.BuildConfig;
 import com.app.remote.domain.constants.Constants;
 import com.app.remote.domain.models.customerOrders.CustomerOrder;
 import com.app.remote.domain.utils.DateTimeUtils;
-import com.app.remote.domain.utils.TimeAgo;
 import com.app.remote.salon.urban.R;
 import com.bumptech.glide.Glide;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -91,6 +85,8 @@ public class CustomerOrderRecyclerAdapter
         myViewHolder.statusTv.setText("closed");
         myViewHolder.statusTv.setTextColor(context.getResources().getColor(R.color.colorAccent));
         break;
+
+
     }
   }
 
@@ -100,14 +96,16 @@ public class CustomerOrderRecyclerAdapter
     inflater.inflate(R.menu.menu_item_option, popup.getMenu());
     popup.show();
 
-    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-      @Override public boolean onMenuItemClick(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.cancel_action) {
-        customerOrderAdapterInterface.cancelOrder(customerOrder,"2");
-        }
-        return false;
+    popup.setOnMenuItemClickListener(item -> {
+      int id = item.getItemId();
+      if (id == R.id.cancel_action) {
+        customerOrderAdapterInterface.cancelOrder(customerOrder, "2");
       }
+      if (id == R.id.rate){
+
+          customerOrderAdapterInterface.rateService(customerOrder.getServiceid());
+      }
+      return false;
     });
   }
 
@@ -121,7 +119,7 @@ public class CustomerOrderRecyclerAdapter
     @BindView(R.id.service) TextView serviceName;
     @BindView(R.id.date) TextView dateTv;
     @BindView(R.id.time) TextView timeTv;
-    @BindView(R.id.orderNumber)TextView orderNumber;
+    @BindView(R.id.orderNumber) TextView orderNumber;
     @BindView(R.id.avatar) ImageView avatar;
     @BindView(R.id.more) ImageView more;
     @BindView(R.id.price) TextView priceTv;
@@ -134,5 +132,7 @@ public class CustomerOrderRecyclerAdapter
 
   public interface customerOrderAdapterInterface {
     void cancelOrder(CustomerOrder customerOrder, String status);
+
+    void rateService(String serviceId);
   }
 }

@@ -52,56 +52,60 @@ public class AnalyticFragment extends BaseFragment implements AlayticPresenter.M
   }
 
   private void setSevenDayChart(LineChart chart, List<AnalyticModel> analyticModels, Boolean type) {
-    List<Entry> entries = new ArrayList<Entry>();
-    final String[] quarters = new String[analyticModels.size()];
-    ValueFormatter formatter = new ValueFormatter() {
-      @Override
-      public String getAxisLabel(float value, AxisBase axis) {
-        return quarters[(int) value];
-      }
-    };
+    if (analyticModels.size() > 1) {
+      List<Entry> entries = new ArrayList<Entry>();
 
-    for (int i = 0; i < analyticModels.size(); i++) {
-      int total;
-      if (type) {
-        total = Integer.parseInt(analyticModels.get(i).getTotal());
-      } else {
-        total = Integer.parseInt(analyticModels.get(i).getCount());
+      final String[] quarters = new String[analyticModels.size()];
+
+      ValueFormatter formatter = new ValueFormatter() {
+        @Override
+        public String getAxisLabel(float value, AxisBase axis) {
+          return quarters[(int) value];
+        }
+      };
+
+      for (int i = 0; i < analyticModels.size(); i++) {
+        int total;
+        if (type) {
+          total = Integer.parseInt(analyticModels.get(i).getTotal());
+        } else {
+          total = Integer.parseInt(analyticModels.get(i).getCount());
+        }
+
+        entries.add(new Entry(i, total));
+        quarters[i] = analyticModels.get(i).getDate();
       }
 
-      entries.add(new Entry(i, total));
-      quarters[i] = analyticModels.get(i).getDate();
+      LineDataSet dataSet = new LineDataSet(entries, "");
+      dataSet.setColor(context.getResources().getColor(R.color.colorAccent));
+      dataSet.setDrawValues(true);
+      dataSet.setLineWidth(2f);
+      dataSet.setDrawCircles(true);
+      LineData lineData = new LineData(dataSet);
+      lineData.setValueFormatter(formatter);
+      chart.setData(lineData);
+
+      YAxis rightYAxis = chart.getAxisRight();
+      rightYAxis.setEnabled(false);
+      YAxis rightYAxisL = chart.getAxisLeft();
+      rightYAxisL.setEnabled(false);
+      XAxis xAxis = chart.getXAxis();
+      xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+      xAxis.setGranularity(1f); // minimum axis-step (interval) is 1
+      xAxis.setValueFormatter(formatter);
+      chart.getAxisLeft().setDrawGridLines(true);
+      chart.getAxisRight().setDrawGridLines(false);
+      chart.getXAxis().setDrawGridLines(true);
+      chart.setAutoScaleMinMaxEnabled(true);
+      Legend legend = chart.getLegend();
+      chart.setBorderColor(R.color.greyColor);
+      chart.setNoDataTextColor(R.color.greyColor);
+      chart.setGridBackgroundColor(context.getResources().getColor(R.color.greyColor));
+      legend.setEnabled(true);
+      legend.setTextColor(context.getResources().getColor(R.color.greyColor));
+      chart.animateXY(5000, 5000);
+      chart.invalidate();
     }
-
-    LineDataSet dataSet = new LineDataSet(entries, "");
-    dataSet.setColor(context.getResources().getColor(R.color.colorAccent));
-    dataSet.setDrawValues(true);
-    dataSet.setLineWidth(2f);
-    dataSet.setDrawCircles(true);
-    LineData lineData = new LineData(dataSet);
-    lineData.setValueFormatter(formatter);
-    chart.setData(lineData);
-
-    YAxis rightYAxis = chart.getAxisRight();
-    rightYAxis.setEnabled(false);
-    YAxis rightYAxisL = chart.getAxisLeft();
-    rightYAxisL.setEnabled(false);
-    XAxis xAxis = chart.getXAxis();
-    xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-    xAxis.setGranularity(1f); // minimum axis-step (interval) is 1
-    xAxis.setValueFormatter(formatter);
-    chart.getAxisLeft().setDrawGridLines(true);
-    chart.getAxisRight().setDrawGridLines(false);
-    chart.getXAxis().setDrawGridLines(true);
-    chart.setAutoScaleMinMaxEnabled(true);
-    Legend legend = chart.getLegend();
-    chart.setBorderColor(R.color.greyColor);
-    chart.setNoDataTextColor(R.color.greyColor);
-    chart.setGridBackgroundColor(context.getResources().getColor(R.color.greyColor));
-    legend.setEnabled(true);
-    legend.setTextColor(context.getResources().getColor(R.color.greyColor));
-    chart.animateXY(5000, 5000);
-    chart.invalidate();
   }
 
   private void setPieChart(CpieData cpieData) {

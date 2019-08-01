@@ -35,6 +35,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="69dp"
+        android:background="@drawable/edit_background"
         android:src="@drawable/image_holder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +59,7 @@
           android:id="@+id/name"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:background="@drawable/edit_background"
           android:hint="name"
           />
     </android.support.design.widget.TextInputLayout>
@@ -79,6 +81,7 @@
           android:id="@+id/amount"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:background="@drawable/edit_background"
           android:hint="price"
           android:inputType="number"
           />
@@ -92,11 +95,12 @@
         android:layout_marginRight="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="36dp"
+        android:background="@color/colorAccent"
         android:text="Create Service"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout8"
-        style="@style/Widget.MaterialComponents.Button"
         />
     <TextView
         android:id="@+id/textView8"

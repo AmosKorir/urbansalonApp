@@ -63,7 +63,6 @@ public class OrderSFragment extends BaseFragment implements SalonOrdersPresenter
     tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
       @Override public void onTabSelected(TabLayout.Tab tab) {
         type = tab.getPosition();
-        customToast(type+"");
         switchType(type);
       }
 
@@ -109,7 +108,6 @@ public class OrderSFragment extends BaseFragment implements SalonOrdersPresenter
   }
 
   @Override public void setFilteredOrders(List<CustomerOrder> customerOrders) {
-    customToast(customerOrders.size() + "");
     //serviceRecyclerView.setLayoutManager(new LinearLayoutManager(context));
     //serviceRecyclerView.setAdapter(new SalonOrderRecyclerAdapter(this, context, customerOrders));
   }
@@ -119,7 +117,6 @@ public class OrderSFragment extends BaseFragment implements SalonOrdersPresenter
   }
 
   @Override public void setOrderStatus(CustomerOrder customerOrder, int i) {
-    customToast(customerOrder.getOrderid().toString());
     salonOrdersPresenter.setOrderStatus(customerOrder.getOrderid(), i);
   }
 }

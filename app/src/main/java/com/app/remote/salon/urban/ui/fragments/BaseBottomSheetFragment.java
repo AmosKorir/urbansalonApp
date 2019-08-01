@@ -1,5 +1,6 @@
 package com.app.remote.salon.urban.ui.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,6 +28,8 @@ import javax.inject.Named;
 public class BaseBottomSheetFragment extends BottomSheetDialogFragment {
   private CompositeDisposable compositeDisposable;
   @Inject @Named(DIConstants.ACTIVITY) Context context;
+  private ProgressDialog progressDialog;
+
   private static final int NO_LAYOUT = -1;
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class BaseBottomSheetFragment extends BottomSheetDialogFragment {
   }
 
   public void handleError(Throwable throwable) {
+    dismissProgressDialog();
     if (isAdded()) {
       if (!(throwable instanceof UnknownHostException)) {
         Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_LONG).show();
@@ -78,6 +82,18 @@ public class BaseBottomSheetFragment extends BottomSheetDialogFragment {
     super.onDestroy();
     dispose();
   }
+  public void showProgress(String message) {
+    progressDialog = new ProgressDialog(context);
+    progressDialog.setMessage(message + "....");
+    progressDialog.show();
+  }
+
+  public void dismissProgressDialog() {
+    if (progressDialog != null) {
+      progressDialog.dismiss();
+    }
+  }
+
 
   protected void dispose() {
     RxUtil.dispose(compositeDisposable);

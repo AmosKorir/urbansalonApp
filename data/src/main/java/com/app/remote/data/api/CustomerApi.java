@@ -7,6 +7,8 @@ import com.app.remote.data.models.customerorders.CustomerOrderResponse;
 import com.app.remote.domain.constants.Constants;
 import io.reactivex.Single;
 import java.util.List;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -55,10 +57,15 @@ public interface CustomerApi {
   Single<OrderModelResponse> cancelOrder(@Header(Constants.AUTHORIZATION) String accessToken,
       @Field("orderid") String orderId);
 
-
-
   @FormUrlEncoded
   @POST("order/status")
   Single<SuccessApiResponse> changeOrderStatus(@Header(Constants.AUTHORIZATION) String accessToken,
       @Field("orderid") Integer orderId, @Field("status") int status);
+
+  @POST("image/upload/customer")
+  Single<SuccessApiResponse> uploadProfile(@Body RequestBody requestBody);
+
+  @POST("rate")
+  Single<SuccessApiResponse> rate(@Header(Constants.AUTHORIZATION) String accessToken,
+      @Field("serviceId") String serviceId, @Field("rating") String rating);
 }

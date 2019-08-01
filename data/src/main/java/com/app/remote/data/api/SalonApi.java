@@ -94,10 +94,9 @@ public interface SalonApi {
       @Field("closing") String closing,
       @Field("status") String availability);
 
-  @FormUrlEncoded
-  @POST("upload/salon")
-  Single<SuccessApiResponse> uploadProfile(@Body RequestBody requestBody,
-      @Header(Constants.AUTHORIZATION) String accessToken);
+
+  @POST("image/upload/salon")
+  Single<SuccessApiResponse> uploadProfile(@Body RequestBody requestBody);
 
   @FormUrlEncoded
   @POST("service/status")
