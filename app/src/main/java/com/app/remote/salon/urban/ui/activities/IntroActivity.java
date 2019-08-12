@@ -19,10 +19,11 @@ public class IntroActivity extends AppIntro {
     addSlide(SampleSlide.newInstance(R.layout.fragment_introone));
     addSlide(SampleSlide.newInstance(R.layout.fragment_introtwo));
     addSlide(SampleSlide.newInstance(R.layout.fragment_intothree));
-    addSlide(SampleSlide.newInstance(R.layout.fragment_share));
 
     showSkipButton(true);
     setProgressButtonEnabled(true);
+    setSeparatorColor(getResources().getColor(R.color.greyColor));
+    setBarColor(getResources().getColor(R.color.colorAccent));
   }
 
   @Override

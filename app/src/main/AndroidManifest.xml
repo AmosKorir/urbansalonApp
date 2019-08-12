@@ -13,8 +13,8 @@
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
     <activity
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-        android:name=".ui.activities.IntroActivity">
+        android:name=".ui.activities.IntroActivity"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -22,8 +22,8 @@
       </intent-filter>
     </activity>
     <activity
-        android:theme="@style/AppTheme.NoActionBar"
-        android:name=".ui.activities.SalonLogin">
+        android:name=".ui.activities.SalonLogin"
+        android:theme="@style/AppTheme.NoActionBar">
     </activity>
     <activity
         android:name=".ui.activities.AddSearvicActivity"
@@ -58,7 +58,6 @@
     <activity
         android:name=".ui.activities.Splash"
         android:theme="@style/AppTheme.NoActionBar">
-
     </activity>
   </application>
 

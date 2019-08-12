@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.app.remote.domain.constants.Constants;
@@ -102,7 +103,7 @@ public class CustomerOrderRecyclerAdapter
         customerOrderAdapterInterface.cancelOrder(customerOrder, "2");
       }
       if (id == R.id.rate){
-
+        String ser=customerOrder.getServiceid();
           customerOrderAdapterInterface.rateService(customerOrder.getServiceid());
       }
       return false;

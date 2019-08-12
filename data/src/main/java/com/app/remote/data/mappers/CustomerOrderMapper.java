@@ -13,6 +13,7 @@ public class CustomerOrderMapper {
   public static CustomerOrder transform(CustomerOrderResponse  customerOrderResponse){
     return CustomerOrder.newBuilder()
         .withCustomer(CustomerMapper.transform(customerOrderResponse.getCustomer()))
+        .withServiceid(customerOrderResponse.getServiceid())
         .withService(transform(customerOrderResponse.getService()))
         .withOrderno(customerOrderResponse.getOrderno())
         .withDatebooked(customerOrderResponse.getDatebooked())

@@ -86,6 +86,7 @@ public class CustomerApiRepository implements CustomerRepository {
   }
 
   @Override public Single<Sucess> rate(String accessToken, String serviceId, String rating) {
-    return customerApi.rate(accessToken,serviceId,rating);
+    return customerApi.rate(accessToken,serviceId,rating)
+        .map(SuccessMapper::transform);
   }
 }

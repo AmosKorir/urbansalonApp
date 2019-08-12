@@ -65,7 +65,8 @@ public interface CustomerApi {
   @POST("image/upload/customer")
   Single<SuccessApiResponse> uploadProfile(@Body RequestBody requestBody);
 
-  @POST("rate")
+  @FormUrlEncoded
+  @POST("rating/rating")
   Single<SuccessApiResponse> rate(@Header(Constants.AUTHORIZATION) String accessToken,
       @Field("serviceId") String serviceId, @Field("rating") String rating);
 }
