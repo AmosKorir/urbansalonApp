@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -18,9 +17,9 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import butterknife.OnClick;
-import com.app.remote.domain.models.CustomerModel;
-import com.app.remote.domain.models.Sucess;
-import com.app.remote.presentation.customerpresenters.CustomerProfilePresenter;
+import com.app.remote.domain.models.OrderModel;
+import com.app.remote.domain.models.customerOrders.CustomerOrder;
+import com.app.remote.presentation.customerpresenters.CustomerPresenter;
 import com.app.remote.salon.urban.R;
 import com.app.remote.salon.urban.ui.fragments.HomeFragment;
 import com.app.remote.salon.urban.ui.fragments.customer.CustomerHistoryFragment;
@@ -31,15 +30,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 import javax.inject.Inject;
 
 public class MainDashBoadActivity extends BaseActivity
     implements NavigationView.OnNavigationItemSelectedListener,
 
-    CustomerProfileFragment.ProfileInterface {
+    CustomerProfileFragment.ProfileInterface, CustomerPresenter.MyView {
   private static final int IMAGE_CODE = 567;
-  CustomerProfileFragment customerProfileFragment=new CustomerProfileFragment();
+  CustomerProfileFragment customerProfileFragment = new CustomerProfileFragment();
   @Inject FragmentManager fragmentManager;
+  @Inject CustomerPresenter customerPresenter;
   private File imageFile;
   DrawerLayout drawer;
 
@@ -67,6 +68,7 @@ public class MainDashBoadActivity extends BaseActivity
     if (drawer.isDrawerOpen(GravityCompat.START)) {
       drawer.closeDrawer(GravityCompat.START);
     } else {
+      finish();
       super.onBackPressed();
     }
   }
@@ -90,15 +92,36 @@ public class MainDashBoadActivity extends BaseActivity
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
     int id = item.getItemId();
-    if (id == R.id.profile) {
-      startProfile();
-    } else if (id == R.id.History) {
-      startHistory();
-    } else if (id == R.id.nav_send) {
 
-    } else if (id == R.id.Bookedservice) {
-      startOrders();
-    } else if (id == R.id.swichAccount) {
+    if (isLoginedIn()) {
+      switch (id) {
+        case R.id.profile:
+          startProfile();
+          break;
+        case R.id.History:
+          startHistory();
+          break;
+        case R.id.Bookedservice:
+          startOrders();
+          break;
+
+      }
+      if (id == R.id.swichAccount) {
+        switchAccount(2);
+      } else if (id == R.id.nav_logout) {
+        logout();
+      }
+    } else {
+      if (id == R.id.swichAccount) {
+        switchAccount(2);
+      } else if (id == R.id.nav_logout) {
+        logout();
+      }else {
+        loginCustomerUser();
+      }
+    }
+
+    if (id == R.id.swichAccount) {
       switchAccount(2);
     } else if (id == R.id.nav_logout) {
       logout();
@@ -106,6 +129,7 @@ public class MainDashBoadActivity extends BaseActivity
 
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
+
     return true;
   }
 
@@ -114,9 +138,12 @@ public class MainDashBoadActivity extends BaseActivity
   @Override protected void onStart() {
     super.onStart();
     setTitle("Current Salons");
+    customerPresenter.setView(this);
     initRecyclerView();
     startHomeFragment();
   }
+
+
 
   //init fragment management
   private FragmentTransaction initFragments() {
@@ -145,7 +172,7 @@ public class MainDashBoadActivity extends BaseActivity
   }
 
   private void startProfile() {
-    customerProfileFragment=new CustomerProfileFragment();
+    customerProfileFragment = new CustomerProfileFragment();
     customerProfileFragment.setProfileInterface(this);
     customerProfileFragment.show(fragmentManager, "profile");
   }
@@ -162,7 +189,11 @@ public class MainDashBoadActivity extends BaseActivity
 
   //top layout navigation
   @OnClick(R.id.bookings) public void bookinga() {
-    startOrders();
+    if (isLoginedIn()) {
+      startOrders();
+    } else {
+      loginCustomerUser();
+    }
   }
 
   @OnClick(R.id.services) public void servicea() {
@@ -202,20 +233,39 @@ public class MainDashBoadActivity extends BaseActivity
           fo.close();
           imageFile = destination;
           customerProfileFragment.upload(imageFile);
-
         } catch (IOException e) {
           customToast("Failed to get the image");
           e.printStackTrace();
         }
       } catch (Exception e) {
-        Log.d("MMMM",e.getMessage());
+        Log.d("MMMM", e.getMessage());
       }
     } else {
       customToast("Failed to get the image");
     }
   }
 
+  //test for login
 
+  private boolean isLoginedIn() {
+    return (customerPresenter.getAccessToken() != null);
+  }
+
+  @Override public void requestLogin() {
+
+  }
+
+  @Override public void loginedIn() {
+
+  }
+
+  @Override public void bookedStatus(OrderModel orderModel) {
+
+  }
+
+  @Override public void orders(List<CustomerOrder> customerOrders) {
+
+  }
 }
 
 

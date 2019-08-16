@@ -45,7 +45,7 @@ public class SalonServicesAdapter extends RecyclerView.Adapter<SalonServicesAdap
   @Override public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
     Service service = services.get(i);
     myViewHolder.serviceName.setText(service.getName());
-    myViewHolder.amountTv.setText(service.getPrice());
+    myViewHolder.amountTv.setText(service.getPrice()+ context.getString(R.string.tail_cash));
     Glide
         .with(context)
         .load(Constants.IMAGE_URL + service.getAvatar())

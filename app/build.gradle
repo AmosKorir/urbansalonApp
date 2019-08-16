@@ -9,6 +9,7 @@ android {
     applicationId "app.urban.salon"
     minSdkVersion 15
     targetSdkVersion 28
+    multiDexEnabled true
     versionCode 1
     versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -44,5 +45,7 @@ dependencies {
   annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
   implementation 'jp.wasabeef:glide-transformations:4.0.0'
   implementation 'com.github.AppIntro:AppIntro:4.2.3'
+  implementation 'com.google.android.gms:play-services:12.0.1'
+  implementation 'com.android.support:multidex:1.0.3'
   api project(path: ':presentation')
 }

@@ -117,6 +117,7 @@ public class AddSearvicActivity extends BaseActivity implements ServicesPresente
     customToast("saved succesfully");
     nameEd.setText(Constants.EMPTY_STRING);
     priceEd.setText(Constants.EMPTY_STRING);
+    dismissProgressDialog();
   }
 
   @Override public void recommended(List<Service> services) {

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.remote.salon.urban">
 
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
   <uses-permission android:name="android.permission.INTERNET"/>
 
   <application
@@ -14,12 +16,8 @@
       android:theme="@style/AppTheme">
     <activity
         android:name=".ui.activities.IntroActivity"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
-
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+        >
     </activity>
     <activity
         android:name=".ui.activities.SalonLogin"
@@ -40,6 +38,8 @@
     </activity>
     <activity
         android:name=".ui.activities.RegisterSalonActivity"
+        android:launchMode="singleInstance"
+        android:taskAffinity=""
         android:theme="@style/AppTheme.NoActionBar">
     </activity>
     <activity
@@ -53,11 +53,17 @@
     <activity
         android:name=".ui.activities.MainDashBoadActivity"
         android:label="@string/title_activity_main_dash_boad_activyity"
+        android:launchMode="singleTask"
         android:theme="@style/AppTheme.NoActionBar">
     </activity>
     <activity
         android:name=".ui.activities.Splash"
-        android:theme="@style/AppTheme.NoActionBar">
+       android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
     </activity>
   </application>
 

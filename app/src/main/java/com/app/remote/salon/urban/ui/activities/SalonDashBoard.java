@@ -153,6 +153,7 @@ public class SalonDashBoard extends BaseActivity
 
   private void toRegister() {
     startActivity(new Intent(this, RegisterSalonActivity.class));
+    finish();
   }
 
   //init fragment management

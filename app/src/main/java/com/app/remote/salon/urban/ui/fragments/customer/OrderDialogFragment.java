@@ -26,7 +26,6 @@ import com.app.remote.presentation.customerpresenters.CustomerPresenter;
 import com.app.remote.salon.urban.R;
 import com.app.remote.salon.urban.ui.activities.CustomerLoginActivity;
 import com.app.remote.salon.urban.ui.fragments.BaseBottomSheetFragment;
-import com.app.remote.salon.urban.ui.fragments.BaseDialogFragment;
 import java.util.Calendar;
 import java.util.List;
 import javax.inject.Inject;
@@ -35,7 +34,8 @@ import javax.inject.Named;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OrderDialogFragment extends BaseBottomSheetFragment implements CustomerPresenter.MyView {
+public class OrderDialogFragment extends BaseBottomSheetFragment
+    implements CustomerPresenter.MyView {
   private View view;
   @Inject CustomerPresenter presenter;
   @Inject @Named(DIConstants.ACTIVITY) Context context;
@@ -74,7 +74,7 @@ public class OrderDialogFragment extends BaseBottomSheetFragment implements Cust
       Bundle savedInstanceState) {
     calendar = Calendar.getInstance();
     year = calendar.get(Calendar.YEAR);
-    month = calendar.get(Calendar.MONTH)+1;
+    month = calendar.get(Calendar.MONTH) + 1;
     day = calendar.get(Calendar.DAY_OF_MONTH);
     hour = calendar.getTime().getHours();
     minutes = calendar.getTime().getMinutes();
@@ -106,8 +106,11 @@ public class OrderDialogFragment extends BaseBottomSheetFragment implements Cust
   };
 
   @OnClick(R.id.bookbtn) public void bookService() {
-
-    presenter.bookService(serviceId, dateTxt.getText().toString(), timeTxt.getText().toString());
+    if (presenter.getAccessToken()!=null) {
+      presenter.bookService(serviceId, dateTxt.getText().toString(), timeTxt.getText().toString());
+    }else {
+      requestLogin();
+    }
   }
 
   private TimePickerDialog.OnTimeSetListener timeSetListener =
@@ -120,7 +123,7 @@ public class OrderDialogFragment extends BaseBottomSheetFragment implements Cust
       };
 
   private void showDate(int year, int month, int day) {
-    dateTxt.setText(year+"/"+month+"/"+day);
+    dateTxt.setText(year + "/" + month + "/" + day);
   }
 
   @Override

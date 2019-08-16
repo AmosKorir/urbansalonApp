@@ -15,6 +15,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.app.remote.data.BuildConfig;
+import com.app.remote.domain.constants.Constants;
 import com.app.remote.domain.models.customerOrders.CustomerOrder;
 import com.app.remote.domain.utils.TimeAgo;
 import com.app.remote.salon.urban.R;
@@ -47,12 +48,12 @@ public class SalonOrderRecyclerAdapter
   @Override public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
     CustomerOrder model = orderModels.get(i);
     Glide.with(context)
-        .load(BuildConfig.BASE_URL + "view/images/" + model.getService().getAvatar())
+        .load(Constants.IMAGE_URL + model.getService().getAvatar())
         .centerCrop()
         .placeholder(R.drawable.image_holder)
         .into(myViewHolder.avatar);
     myViewHolder.serviceNameTV.setText(model.getService().getName());
-    myViewHolder.priceTv.setText(model.getStatus().toString());
+    myViewHolder.priceTv.setText(model.getService().getPrice().toString() + context.getString(R.string.tail_cash));
     myViewHolder.dateTv.setText(TimeAgo.covertTimeToText(model.getDatebooked()));
     myViewHolder.timeTv.setText(model.getTimebooked());
     myViewHolder.nameTv.setText(model.getCustomer().getName());

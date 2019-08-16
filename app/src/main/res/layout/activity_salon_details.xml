@@ -52,7 +52,7 @@
       android:layout_marginEnd="8dp"
       android:layout_marginRight="8dp"
       android:text="Juja Salon"
-      android:textColor="@color/primaryTextColor"
+      android:textColor="@color/colorAccent"
       android:textSize="18sp"
       app:layout_constraintBottom_toTopOf="@+id/status"
       app:layout_constraintEnd_toEndOf="parent"
@@ -111,5 +111,16 @@
       android:text="TextView"
       app:layout_constraintStart_toEndOf="@+id/textView24"
       app:layout_constraintTop_toBottomOf="@+id/imageback"
+      />
+  <ImageView
+      android:id="@+id/direction"
+      android:layout_width="70dp"
+      android:layout_height="40dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginTop="15dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/imageback"
+      app:srcCompat="@drawable/ic_location_on_black_24dp"
       />
 </android.support.constraint.ConstraintLayout>

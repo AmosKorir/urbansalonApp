@@ -1,5 +1,7 @@
 package com.app.remote.salon.urban.ui.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
@@ -7,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
+import butterknife.OnClick;
 import com.app.remote.domain.constants.Constants;
 import com.app.remote.domain.models.SalonModel;
 import com.app.remote.domain.models.Service;
@@ -54,6 +57,16 @@ public class SalonDetailsActivity extends BaseActivity
     setSalonData();
   }
 
+  @OnClick(R.id.direction) public void showOnMap() {
+    String geoUrl = "geo:" + salonModel.getLatitude() + "," + salonModel.getLongitude();
+    Uri gmmIntentUri = Uri.parse(geoUrl);
+    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+    mapIntent.setPackage("com.google.android.apps.maps");
+    if (mapIntent.resolveActivity(getPackageManager()) != null) {
+      startActivity(mapIntent);
+    }
+  }
+
   private void setSalonData() {
     Glide.with(this)
         .load(Constants.IMAGE_URL + salonModel.getAvatar())
@@ -97,4 +110,5 @@ public class SalonDetailsActivity extends BaseActivity
     OrderDialogFragment orderDialogFragment = OrderDialogFragment.newInstance(serviceid);
     orderDialogFragment.show(fragmentManager, "Order the Service");
   }
+
 }

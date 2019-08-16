@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.app.remote.domain.constants.Constants;
@@ -79,15 +78,13 @@ public class CustomerOrderRecyclerAdapter
         myViewHolder.statusTv.setTextColor(context.getResources().getColor(R.color.colorAccent));
         break;
       case 2:
-        myViewHolder.statusTv.setText("Rejected");
-        myViewHolder.statusTv.setTextColor(context.getResources().getColor(R.color.colorAccent));
-        break;
-      case 3:
         myViewHolder.statusTv.setText("closed");
         myViewHolder.statusTv.setTextColor(context.getResources().getColor(R.color.colorAccent));
         break;
-
-
+      case 3:
+        myViewHolder.statusTv.setText("Rejected");
+        myViewHolder.statusTv.setTextColor(context.getResources().getColor(R.color.colorAccent));
+        break;
     }
   }
 
@@ -102,9 +99,9 @@ public class CustomerOrderRecyclerAdapter
       if (id == R.id.cancel_action) {
         customerOrderAdapterInterface.cancelOrder(customerOrder, "2");
       }
-      if (id == R.id.rate){
-        String ser=customerOrder.getServiceid();
-          customerOrderAdapterInterface.rateService(customerOrder.getServiceid());
+      if (id == R.id.rate) {
+        String ser = customerOrder.getServiceid();
+        customerOrderAdapterInterface.rateService(customerOrder.getServiceid());
       }
       return false;
     });

@@ -39,6 +39,10 @@ public class ServicesPresenter implements BasePresenter {
     return sharedPreferences.getString(Constants.ACCESS_SALON, null);
   }
 
+  public String getCustomerToken() {
+    return sharedPreferences.getString(Constants.ACCESS_TOKEN, null);
+  }
+
   public void createOrder(String name, String price, File file) {
     compositeDisposable = RxUtil.initDisposables(compositeDisposable);
     Disposable disposable = salonApiRepository.createService(getAccessToken(), name, price)
@@ -81,7 +85,7 @@ public class ServicesPresenter implements BasePresenter {
 
   public void getRecommendation() {
     compositeDisposable = RxUtil.initDisposables(compositeDisposable);
-    Disposable disposable = salonApiRepository.getRecommended(getAccessToken())
+    Disposable disposable = salonApiRepository.getRecommended(getCustomerToken())
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(view::recommended, view::handleError);

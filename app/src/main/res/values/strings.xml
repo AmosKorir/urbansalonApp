@@ -23,4 +23,5 @@
   <string name="loggedin">Logged in successful</string>
   <string name="logout">Logout</string>
   <string name="switch_to_salon">Switch to Salon</string>
+  <string name="tail_cash">/=</string>
 </resources>

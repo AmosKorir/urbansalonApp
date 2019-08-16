@@ -1,6 +1,8 @@
 package com.app.remote.salon.urban.ui.activities;
 
 import android.content.Intent;
+import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import butterknife.BindView;
@@ -18,8 +20,13 @@ public class RegisterSalonActivity extends BaseActivity implements SalonRegister
   @BindView(R.id.location) TextInputEditText locationEd;
   @BindView(R.id.confirmpassword) TextInputEditText confirmEd;
   private String nameStr, passwordStr, confirmStr, locationStr, phoneStr;
+  private String latitude = "1.0891";
+  private String longitude = "37.0105";
+
+  //just using the above as default location. Should not be the case
 
   @Override
+
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_register_salon);
@@ -35,6 +42,8 @@ public class RegisterSalonActivity extends BaseActivity implements SalonRegister
     finish();
   }
 
+
+
   private void getUserInput() {
     nameStr = nameEd.getText().toString().trim();
     phoneStr = phoneEd.getText().toString().trim();
@@ -48,8 +57,8 @@ public class RegisterSalonActivity extends BaseActivity implements SalonRegister
         && !confirmStr.isEmpty()
         && !locationStr.isEmpty()) {
       if (confirmStr.equals(passwordStr)) {
-        salonRegisterPresenter.createSalon(nameStr, phoneStr, passwordStr, locationStr, "0.0",
-            "0.0");
+        salonRegisterPresenter.createSalon(nameStr, phoneStr, passwordStr, locationStr, latitude,
+            longitude);
       } else {
         customToast(getString(R.string.password_not_match));
       }
@@ -60,6 +69,13 @@ public class RegisterSalonActivity extends BaseActivity implements SalonRegister
 
   @Override protected void onStart() {
     super.onStart();
+    if (isLocationEnabled()) {
+      checkPermission();
+      listenForLocation(this);
+    } else {
+      redireTosetting();
+    }
+
     salonRegisterPresenter.setView(this);
   }
 
@@ -69,8 +85,15 @@ public class RegisterSalonActivity extends BaseActivity implements SalonRegister
   }
 
   @Override public void onBackPressed() {
+
     super.onBackPressed();
-    startActivity(new Intent(this,MainDashBoadActivity.class));
-    finish();
+    switchAccount(1);
+  }
+
+  public void updateRetrievedLocation(Location location, boolean b) {
+    if (b) {
+      latitude = String.valueOf(location.getLatitude());
+      longitude = String.valueOf(location.getLongitude());
+    }
   }
 }

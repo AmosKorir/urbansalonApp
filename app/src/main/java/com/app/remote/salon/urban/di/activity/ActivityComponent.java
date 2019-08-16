@@ -11,6 +11,7 @@ import com.app.remote.salon.urban.ui.activities.RegisterSalonActivity;
 import com.app.remote.salon.urban.ui.activities.SalonDashBoard;
 import com.app.remote.salon.urban.ui.activities.SalonDetailsActivity;
 import com.app.remote.salon.urban.ui.activities.SalonLogin;
+import com.app.remote.salon.urban.ui.activities.Splash;
 import dagger.Subcomponent;
 
 /**
@@ -40,6 +41,8 @@ public interface ActivityComponent {
   void inject(AddSearvicActivity addSearvicActivity);
 
   void inject(SalonLogin salonLogin);
+
+  void inject(Splash splash);
 
   @Subcomponent.Builder interface Builder {
     Builder activityModule(ActivityModule activityModule);
