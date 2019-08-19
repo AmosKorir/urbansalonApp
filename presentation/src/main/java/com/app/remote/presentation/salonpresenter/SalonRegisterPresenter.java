@@ -62,6 +62,7 @@ public class SalonRegisterPresenter implements BasePresenter {
     compositeDisposable = RxUtil.initDisposables(compositeDisposable);
     Disposable disposable = salonRepository.loginUser(phone, password)
         .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
         .subscribe(s -> {
           saveAccessToken(s.getAccesstoken());
           view.success(s);
