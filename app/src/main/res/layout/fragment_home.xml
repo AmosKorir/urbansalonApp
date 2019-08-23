@@ -1,0 +1,41 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.app.remote.salon.urban.ui.fragments.HomeFragment"
+    >
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Recommended Services"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="14sp"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recomended"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Available Services"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="14sp"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/serviceList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+  </LinearLayout>
+</FrameLayout>

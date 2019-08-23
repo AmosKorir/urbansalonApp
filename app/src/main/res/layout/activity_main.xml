@@ -4,26 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.Splash">
+    tools:context=".ui.activities.Splash"
+    >
   <ImageView
       android:id="@+id/imageView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginBottom="125dp"
+      android:layout_marginTop="8dp"
       android:scaleX="2"
       android:scaleY="2"
+      app:layout_constraintBottom_toTopOf="@+id/textView"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.88"
       app:srcCompat="@mipmap/ic_launcher_foreground"
-      tools:layout_editor_absoluteY="287dp"
       />
   <TextView
       android:id="@+id/textView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginBottom="187dp"
       android:text="@string/app_name"
       android:textSize="18sp"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      tools:layout_editor_absoluteY="520dp"
       />
 </android.support.constraint.ConstraintLayout>
